@@ -31,7 +31,7 @@ final class ManagingCurrenciesContext implements Context
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;

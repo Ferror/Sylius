@@ -32,7 +32,7 @@ final class ProductVariantContext implements Context
     public function __construct(
         ProductRepositoryInterface $productRepository,
         ProductVariantRepositoryInterface $productVariantRepository,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->productRepository = $productRepository;
         $this->productVariantRepository = $productVariantRepository;
@@ -49,13 +49,13 @@ final class ProductVariantContext implements Context
         Assert::eq(
             count($products),
             1,
-            sprintf('%d products has been found with name "%s".', count($products), $productName)
+            sprintf('%d products has been found with name "%s".', count($products), $productName),
         );
 
         $productVariants = $this->productVariantRepository->findByNameAndProduct($variantName, 'en_US', $products[0]);
         Assert::notEmpty(
             $productVariants,
-            sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName)
+            sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName),
         );
 
         return $productVariants[0];
@@ -71,7 +71,7 @@ final class ProductVariantContext implements Context
         $productVariants = $this->productVariantRepository->findByNameAndProduct($variantName, 'en_US', $product);
         Assert::notEmpty(
             $productVariants,
-            sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $product->getName())
+            sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $product->getName()),
         );
 
         return $productVariants[0];
@@ -89,7 +89,7 @@ final class ProductVariantContext implements Context
         Assert::eq(
             count($productVariants),
             1,
-            sprintf('%d product variants has been found with name "%s".', count($productVariants), $name)
+            sprintf('%d product variants has been found with name "%s".', count($productVariants), $name),
         );
 
         return $productVariants[0];
@@ -125,14 +125,14 @@ final class ProductVariantContext implements Context
         string $option1,
         string $value2,
         string $option2,
-        string $productName
+        string $productName,
     ) {
         $products = $this->productRepository->findByName($productName, 'en_US');
 
         Assert::eq(
             count($products),
             1,
-            sprintf('%d products has been found with name "%s".', count($products), $productName)
+            sprintf('%d products has been found with name "%s".', count($products), $productName),
         );
         $product = $products[0];
 
@@ -156,8 +156,8 @@ final class ProductVariantContext implements Context
                 $option1,
                 $value2,
                 $option2,
-                $product->getCode()
-            )
+                $product->getCode(),
+            ),
         );
     }
 }

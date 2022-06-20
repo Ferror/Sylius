@@ -49,7 +49,7 @@ final class OrderItemSpec extends ObjectBehavior
         OrderItemUnitInterface $orderItemUnit1,
         OrderItemUnitInterface $orderItemUnit2,
         AdjustmentInterface $nonNeutralTaxAdjustment,
-        AdjustmentInterface $neutralTaxAdjustment
+        AdjustmentInterface $neutralTaxAdjustment,
     ): void {
         $orderItemUnit1->getTotal()->willReturn(1200);
         $orderItemUnit1->getTaxTotal()->willReturn(200);
@@ -77,7 +77,7 @@ final class OrderItemSpec extends ObjectBehavior
     }
 
     function it_returns_discounted_unit_price_which_is_first_unit_price_lowered_by_unit_promotions(
-        OrderItemUnitInterface $unit
+        OrderItemUnitInterface $unit,
     ): void {
         $this->setUnitPrice(10000);
 
@@ -99,7 +99,7 @@ final class OrderItemSpec extends ObjectBehavior
 
     function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
         OrderItemUnitInterface $firstUnit,
-        OrderItemUnitInterface $secondUnit
+        OrderItemUnitInterface $secondUnit,
     ): void {
         $this->setUnitPrice(10000);
 

@@ -33,7 +33,7 @@ final class AddressContext implements Context
     public function __construct(
         AddressRepositoryInterface $addressRepository,
         ObjectManager $customerManager,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->addressRepository = $addressRepository;
         $this->customerManager = $customerManager;

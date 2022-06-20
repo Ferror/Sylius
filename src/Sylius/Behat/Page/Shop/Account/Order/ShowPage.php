@@ -27,7 +27,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        TableAccessorInterface $tableAccessor
+        TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
 
@@ -52,7 +52,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ): bool {
         $shippingAddressText = $this->getElement('shipping_address')->getText();
 
@@ -64,7 +64,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ): bool {
         $billingAddressText = $this->getElement('billing_address')->getText();
 
@@ -190,7 +190,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ): bool {
         return
             (stripos($elementText, $customerName) !== false) &&

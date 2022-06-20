@@ -33,7 +33,7 @@ final class ManagingPaymentsContext implements Context
     public function __construct(
         IndexPageInterface $indexPage,
         ShowPageInterface $orderShowPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->indexPage = $indexPage;
         $this->orderShowPage = $orderShowPage;
@@ -104,7 +104,7 @@ final class ManagingPaymentsContext implements Context
     public function thePaymentOfTheOrderShouldBeFor(
         string $orderNumber,
         string $paymentState,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $parameters = [
             'number' => $orderNumber,

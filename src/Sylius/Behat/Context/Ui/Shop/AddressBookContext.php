@@ -49,7 +49,7 @@ final class AddressBookContext implements Context
         CreatePageInterface $addressBookCreatePage,
         UpdatePageInterface $addressBookUpdatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->addressRepository = $addressRepository;
@@ -397,6 +397,7 @@ final class AddressBookContext implements Context
             ->getCurrentPageWithForm([
                 $this->addressBookCreatePage,
                 $this->addressBookUpdatePage,
-        ]);
+        ])
+        ;
     }
 }

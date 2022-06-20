@@ -35,7 +35,7 @@ final class UserContext implements Context
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ShowPageInterface $customerShowPage,
-        HomePageInterface $homePage
+        HomePageInterface $homePage,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;

@@ -57,7 +57,7 @@ class RegistrationContext implements Context
         VerificationPageInterface $verificationPage,
         ProfileUpdatePageInterface $profileUpdatePage,
         RegisterElementInterface $registerElement,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->dashboardPage = $dashboardPage;
@@ -191,7 +191,7 @@ class RegistrationContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Thank you for registering, check your email to verify your account.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -353,7 +353,7 @@ class RegistrationContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'An email with the verification link has been sent to your email address.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 

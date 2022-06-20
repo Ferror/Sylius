@@ -81,7 +81,7 @@ final class ManagingProductsContext implements Context
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker,
         VariantUpdatePageInterface $variantUpdatePage,
-        JavaScriptTestHelperInterface $testHelper
+        JavaScriptTestHelperInterface $testHelper,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createSimpleProductPage = $createSimpleProductPage;
@@ -401,7 +401,7 @@ final class ManagingProductsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Cannot delete, the product is in use.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -698,7 +698,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAssociateProductsAsProductAssociation(
         ProductAssociationTypeInterface $productAssociationType,
-        ...$productsNames
+        ...$productsNames,
     ) {
         $currentPage = $this->resolveCurrentPage();
 
@@ -710,7 +710,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveAnAssociatedProductFromProductAssociation(
         $productName,
-        ProductAssociationTypeInterface $productAssociationType
+        ProductAssociationTypeInterface $productAssociationType,
     ) {
         $currentPage = $this->resolveCurrentPage();
 
@@ -849,7 +849,7 @@ final class ManagingProductsContext implements Context
      */
     public function theProductShouldHaveAnAssociationWithProducts(
         ProductAssociationTypeInterface $productAssociationType,
-        ...$productsNames
+        ...$productsNames,
     ) {
         foreach ($productsNames as $productName) {
             Assert::true(
@@ -857,8 +857,8 @@ final class ManagingProductsContext implements Context
                 sprintf(
                     'This product should have an association %s with product %s.',
                     $productAssociationType->getName(),
-                    $productName
-                )
+                    $productName,
+                ),
             );
         }
     }
@@ -868,7 +868,7 @@ final class ManagingProductsContext implements Context
      */
     public function theProductShouldNotHaveAnAssociationWithProduct(
         ProductAssociationTypeInterface $productAssociationType,
-        $productName
+        $productName,
     ) {
         Assert::false($this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType));
     }
@@ -880,7 +880,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->createSimpleProductPage->getChannelPricingValidationMessage(),
-            'Original price can not be defined without price'
+            'Original price can not be defined without price',
         );
     }
 
@@ -915,7 +915,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->createSimpleProductPage->getChannelPricingValidationMessage(),
-            'You must define price for every channel.'
+            'You must define price for every channel.',
         );
     }
 
@@ -989,7 +989,7 @@ final class ManagingProductsContext implements Context
 
         Assert::same(
             $this->updateSimpleProductPage->getOriginalPriceForChannel($channel),
-            $originalPrice
+            $originalPrice,
         );
     }
 
@@ -1002,7 +1002,7 @@ final class ManagingProductsContext implements Context
 
         Assert::true(
             $this->updateSimpleProductPage->hasNoPriceForChannel($channelName),
-            sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName)
+            sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName),
         );
     }
 
@@ -1013,7 +1013,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->updateConfigurableProductPage->getValidationMessage('channels'),
-            'You have to define product variants\' prices for newly assigned channels first.'
+            'You have to define product variants\' prices for newly assigned channels first.',
         );
     }
 
@@ -1034,7 +1034,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
-            'This value should not be blank.'
+            'This value should not be blank.',
         );
     }
 
@@ -1045,7 +1045,7 @@ final class ManagingProductsContext implements Context
     {
         Assert::same(
             $this->resolveCurrentPage()->getAttributeValidationErrors($attribute, $language),
-            sprintf('This value is too short. It should have %s characters or more.', $number)
+            sprintf('This value is too short. It should have %s characters or more.', $number),
         );
     }
 
@@ -1088,7 +1088,7 @@ final class ManagingProductsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             sprintf('The position "%s" is invalid.', $invalidPosition),
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -1119,7 +1119,7 @@ final class ManagingProductsContext implements Context
         Assert::false($this->updateSimpleProductPage->isEnabled());
 
         $this->variantUpdatePage->open(
-            ['productId' => $product->getId(), 'id' => $product->getVariants()->first()->getId()]
+            ['productId' => $product->getId(), 'id' => $product->getVariants()->first()->getId()],
         );
         Assert::false($this->variantUpdatePage->isEnabled());
     }
@@ -1143,7 +1143,7 @@ final class ManagingProductsContext implements Context
         Assert::true($this->updateSimpleProductPage->isEnabled());
 
         $this->variantUpdatePage->open(
-            ['productId' => $product->getId(), 'id' => $product->getVariants()->first()->getId()]
+            ['productId' => $product->getId(), 'id' => $product->getVariants()->first()->getId()],
         );
         Assert::true($this->variantUpdatePage->isEnabled());
     }
@@ -1193,7 +1193,7 @@ final class ManagingProductsContext implements Context
 
         Assert::true(
             $currentPage->hasResourceValues([$element => $value]),
-            sprintf('Product should have %s with %s value.', $element, $value)
+            sprintf('Product should have %s with %s value.', $element, $value),
         );
     }
 

@@ -31,7 +31,7 @@ final class ExchangeRateContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $exchangeRateFactory,
-        ExchangeRateRepositoryInterface $exchangeRateRepository
+        ExchangeRateRepositoryInterface $exchangeRateRepository,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->exchangeRateFactory = $exchangeRateFactory;
@@ -44,7 +44,7 @@ final class ExchangeRateContext implements Context
     public function thereIsAnExchangeRateWithSourceCurrencyAndTargetCurrency(
         CurrencyInterface $sourceCurrency,
         CurrencyInterface $targetCurrency,
-        $ratio
+        $ratio,
     ) {
         $exchangeRate = $this->createExchangeRate($sourceCurrency, $targetCurrency, $ratio);
 

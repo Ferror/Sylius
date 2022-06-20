@@ -39,7 +39,7 @@ final class ProductOptionContext implements Context
         ProductOptionRepositoryInterface $productOptionRepository,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productOptionRepository = $productOptionRepository;
@@ -73,7 +73,7 @@ final class ProductOptionContext implements Context
     public function thisProductOptionHasTheOptionValueWithCode(
         ProductOptionInterface $productOption,
         $productOptionValueName,
-        $productOptionValueCode
+        $productOptionValueCode,
     ) {
         $productOptionValue = $this->createProductOptionValue($productOptionValueName, $productOptionValueCode);
         $productOption->addValue($productOptionValue);

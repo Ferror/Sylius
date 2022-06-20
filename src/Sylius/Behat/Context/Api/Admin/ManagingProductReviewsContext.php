@@ -32,7 +32,7 @@ final class ManagingProductReviewsContext implements Context
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
@@ -114,7 +114,7 @@ final class ManagingProductReviewsContext implements Context
     {
         Assert::true(
             $this->isItemOnIndex('title', $title),
-            sprintf('Product review with title %s does not exist', $title)
+            sprintf('Product review with title %s does not exist', $title),
         );
     }
 
@@ -167,7 +167,7 @@ final class ManagingProductReviewsContext implements Context
         $id = (string) $this->sharedStorage->get('product_review_id');
         Assert::false(
             $this->isItemOnIndex('id', $id),
-            sprintf('Product review with id %s exist', $id)
+            sprintf('Product review with id %s exist', $id),
         );
     }
 
@@ -178,7 +178,7 @@ final class ManagingProductReviewsContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('%s: Review %s should not be blank', $element, $element)
+            sprintf('%s: Review %s should not be blank', $element, $element),
         );
     }
 
@@ -205,7 +205,7 @@ final class ManagingProductReviewsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Product review could not be edited'
+            'Product review could not be edited',
         );
     }
 
@@ -216,7 +216,7 @@ final class ManagingProductReviewsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Product review could not be deleted'
+            'Product review could not be deleted',
         );
     }
 
@@ -230,7 +230,7 @@ final class ManagingProductReviewsContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show(Resources::PRODUCT_REVIEWS, (string) $productReview->getId()), $element, $value),
-            sprintf('Product review %s is not %s', $element, $value)
+            sprintf('Product review %s is not %s', $element, $value),
         );
     }
 }

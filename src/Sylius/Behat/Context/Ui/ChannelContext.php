@@ -43,7 +43,7 @@ final class ChannelContext implements Context
         ChannelRepositoryInterface $channelRepository,
         CreatePageInterface $channelCreatePage,
         HomePageInterface $homePage,
-        MainPageInterface $pluginMainPage
+        MainPageInterface $pluginMainPage,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->channelContextSetter = $channelContextSetter;

@@ -35,7 +35,7 @@ final class CurrencyContext implements Context
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
         FactoryInterface $currencyFactory,
-        ObjectManager $channelManager
+        ObjectManager $channelManager,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;

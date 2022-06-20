@@ -40,7 +40,7 @@ final class CheckoutCompleteContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CompletePageInterface $completePage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->completePage = $completePage;
@@ -285,8 +285,8 @@ final class CheckoutCompleteContext implements Context
             $this->completePage->getValidationErrors(),
             sprintf(
                 'Product does not fit requirements for %s shipping method. Please reselect your shipping method.',
-                $shippingMethod->getName()
-            )
+                $shippingMethod->getName(),
+            ),
         );
     }
 
@@ -297,7 +297,7 @@ final class CheckoutCompleteContext implements Context
     {
         $this->notificationChecker->checkNotification(
             sprintf('You are no longer eligible for this promotion %s.', $promotion->getName()),
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -310,8 +310,8 @@ final class CheckoutCompleteContext implements Context
             $this->completePage->getValidationErrors(),
             sprintf(
                 'This payment method %s has been disabled. Please reselect your payment method.',
-                $paymentMethod->getName()
-            )
+                $paymentMethod->getName(),
+            ),
         );
     }
 
@@ -324,8 +324,8 @@ final class CheckoutCompleteContext implements Context
             $this->completePage->getValidationErrors(),
             sprintf(
                 'This product %s has been disabled.',
-                $product->getName()
-            )
+                $product->getName(),
+            ),
         );
     }
 
@@ -336,7 +336,7 @@ final class CheckoutCompleteContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Your order total has been changed, check your order information and confirm it again.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 
@@ -357,8 +357,8 @@ final class CheckoutCompleteContext implements Context
             $this->completePage->getValidationErrors(),
             sprintf(
                 'This product %s has been disabled.',
-                $productVariant->getName()
-            )
+                $productVariant->getName(),
+            ),
         );
     }
 

@@ -35,7 +35,7 @@ final class AddressContext implements Context
         FactoryInterface $addressFactory,
         CountryNameConverterInterface $countryNameConverter,
         AddressRepositoryInterface $addressRepository,
-        ExampleFactoryInterface $exampleAddressFactory
+        ExampleFactoryInterface $exampleAddressFactory,
     ) {
         $this->addressFactory = $addressFactory;
         $this->countryNameConverter = $countryNameConverter;

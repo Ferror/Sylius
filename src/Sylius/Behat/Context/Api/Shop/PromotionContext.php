@@ -31,7 +31,7 @@ final class PromotionContext implements Context
     public function __construct(
         ApiClientInterface $client,
         SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
     ) {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;

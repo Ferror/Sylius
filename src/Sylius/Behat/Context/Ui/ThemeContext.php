@@ -36,7 +36,7 @@ final class ThemeContext implements Context
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $channelIndexPage,
         UpdatePageInterface $channelUpdatePage,
-        HomePageInterface $homePage
+        HomePageInterface $homePage,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->channelIndexPage = $channelIndexPage;

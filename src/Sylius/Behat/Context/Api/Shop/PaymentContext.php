@@ -34,7 +34,7 @@ final class PaymentContext implements Context
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;

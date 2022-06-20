@@ -35,7 +35,7 @@ final class ThemeContext implements Context
         SharedStorageInterface $sharedStorage,
         ThemeRepositoryInterface $themeRepository,
         ObjectManager $channelManager,
-        TestThemeConfigurationManagerInterface $testThemeConfigurationManager
+        TestThemeConfigurationManagerInterface $testThemeConfigurationManager,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->themeRepository = $themeRepository;

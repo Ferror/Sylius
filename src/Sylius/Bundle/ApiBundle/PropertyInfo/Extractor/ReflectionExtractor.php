@@ -97,7 +97,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
         private bool $enableConstructorExtraction = true,
         int $accessFlags = self::ALLOW_PUBLIC,
         InflectorInterface $inflector = null,
-        private int $magicMethodsFlags = self::ALLOW_MAGIC_GET | self::ALLOW_MAGIC_SET
+        private int $magicMethodsFlags = self::ALLOW_MAGIC_GET | self::ALLOW_MAGIC_SET,
     ) {
         $this->mutatorPrefixes = null !== $mutatorPrefixes ? $mutatorPrefixes : self::$defaultMutatorPrefixes;
         $this->accessorPrefixes = null !== $accessorPrefixes ? $accessorPrefixes : self::$defaultAccessorPrefixes;
@@ -450,7 +450,7 @@ class ReflectionExtractor implements PropertyListExtractorInterface, PropertyTyp
                 'the new value must be an array or an instance of \Traversable',
                 $property,
                 $reflClass->getName(),
-                implode('()", "', [$adderAccessName, $removerAccessName])
+                implode('()", "', [$adderAccessName, $removerAccessName]),
             );
         }
 

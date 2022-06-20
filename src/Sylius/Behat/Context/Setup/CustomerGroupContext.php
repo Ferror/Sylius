@@ -31,7 +31,7 @@ final class CustomerGroupContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $customerGroupRepository,
-        FactoryInterface $customerGroupFactory
+        FactoryInterface $customerGroupFactory,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerGroupRepository = $customerGroupRepository;

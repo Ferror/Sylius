@@ -176,7 +176,7 @@ final class CheckoutPaymentContext implements Context
         foreach ($paymentMethodsNames as $paymentMethodName) {
             Assert::true(
                 $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-                sprintf('There is no %s payment method', $paymentMethodName)
+                sprintf('There is no %s payment method', $paymentMethodName),
             );
         }
     }
@@ -189,7 +189,7 @@ final class CheckoutPaymentContext implements Context
         foreach ($paymentMethodsNames as $paymentMethodName) {
             Assert::false(
                 $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-                sprintf('There is %s payment method', $paymentMethodName)
+                sprintf('There is %s payment method', $paymentMethodName),
             );
         }
     }

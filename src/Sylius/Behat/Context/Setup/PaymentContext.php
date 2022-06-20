@@ -46,7 +46,7 @@ final class PaymentContext implements Context
         ExampleFactoryInterface $paymentMethodExampleFactory,
         FactoryInterface $paymentMethodTranslationFactory,
         ObjectManager $paymentMethodManager,
-        array $gatewayFactories
+        array $gatewayFactories,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paymentMethodRepository = $paymentMethodRepository;
@@ -90,7 +90,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodWithCodeAndPaypalExpressCheckoutGateway(
         $paymentMethodName,
-        $paymentMethodCode
+        $paymentMethodCode,
     ) {
         $paymentMethod = $this->createPaymentMethod($paymentMethodName, $paymentMethodCode, 'Paypal Express Checkout');
         $paymentMethod->getGatewayConfig()->setConfig([
@@ -170,7 +170,7 @@ final class PaymentContext implements Context
             StringInflector::nameToUppercaseCode($paymentMethodName),
             'Offline',
             'Payment method',
-            false
+            false,
         );
 
         $paymentMethod->addChannel($channel);
@@ -202,7 +202,7 @@ final class PaymentContext implements Context
         $gatewayFactory = 'Offline',
         $description = '',
         $addForCurrentChannel = true,
-        $position = null
+        $position = null,
     ) {
         $gatewayFactory = array_search($gatewayFactory, $this->gatewayFactories);
 

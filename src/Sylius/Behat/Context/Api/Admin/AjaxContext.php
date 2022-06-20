@@ -43,7 +43,7 @@ final class AjaxContext implements Context
             '/admin/ajax/product-variants/search',
             ['phrase' => $phrase, 'productCode' => $product->getCode()],
             [],
-            ['ACCEPT' => 'application/json']
+            ['ACCEPT' => 'application/json'],
         );
     }
 

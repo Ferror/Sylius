@@ -41,7 +41,7 @@ final class ManagingShippingMethodsContext implements Context
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
@@ -175,7 +175,7 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theShippingMethodShouldBeAvailableInChannel(
         ShippingMethodInterface $shippingMethod,
-        $channelName
+        $channelName,
     ) {
         $this->iWantToModifyAShippingMethod($shippingMethod);
 
@@ -255,7 +255,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         $this->assertFieldValidationMessage(
             'code',
-            'Shipping method code can only be comprised of letters, numbers, dashes and underscores.'
+            'Shipping method code can only be comprised of letters, numbers, dashes and underscores.',
         );
     }
 
@@ -481,7 +481,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::same(
             $currentPage->getValidationMessageForAmount($channel->getCode()),
-            'This value should not be blank.'
+            'This value should not be blank.',
         );
     }
 
@@ -495,7 +495,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::same(
             $currentPage->getValidationMessageForAmount($channel->getCode()),
-            'Shipping charge cannot be lower than 0.'
+            'Shipping charge cannot be lower than 0.',
         );
     }
 

@@ -26,7 +26,7 @@ final class PromotionContext implements Context
 
     public function __construct(
         PromotionRepositoryInterface $promotionRepository,
-        PromotionCouponRepositoryInterface $promotionCouponRepository
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
     ) {
         $this->promotionRepository = $promotionRepository;
         $this->promotionCouponRepository = $promotionCouponRepository;
@@ -43,7 +43,7 @@ final class PromotionContext implements Context
 
         Assert::notNull(
             $promotion,
-            sprintf('Promotion with name "%s" does not exist', $promotionName)
+            sprintf('Promotion with name "%s" does not exist', $promotionName),
         );
 
         return $promotion;
@@ -60,7 +60,7 @@ final class PromotionContext implements Context
 
         Assert::notNull(
             $promotionCoupon,
-            sprintf('Promotion coupon with code "%s" does not exist', $promotionCouponCode)
+            sprintf('Promotion coupon with code "%s" does not exist', $promotionCouponCode),
         );
 
         return $promotionCoupon;

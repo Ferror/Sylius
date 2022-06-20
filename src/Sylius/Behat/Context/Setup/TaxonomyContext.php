@@ -52,7 +52,7 @@ final class TaxonomyContext implements Context
         ObjectManager $objectManager,
         ImageUploaderInterface $imageUploader,
         TaxonSlugGeneratorInterface $taxonSlugGenerator,
-        \ArrayAccess $minkParameters
+        \ArrayAccess $minkParameters,
     ) {
         $this->taxonRepository = $taxonRepository;
         $this->taxonFactory = $taxonFactory;

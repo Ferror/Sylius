@@ -35,7 +35,7 @@ final class ManagingTaxRateContext implements Context
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
@@ -325,7 +325,7 @@ final class ManagingTaxRateContext implements Context
                     'code' => $taxRate->getCode(),
                     $element => $taxRateElement,
             ]),
-            sprintf('Tax rate %s %s has not been assigned properly.', $element, $taxRateElement)
+            sprintf('Tax rate %s %s has not been assigned properly.', $element, $taxRateElement),
         );
     }
 

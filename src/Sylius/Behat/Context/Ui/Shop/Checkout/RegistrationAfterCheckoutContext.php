@@ -43,7 +43,7 @@ final class RegistrationAfterCheckoutContext implements Context
         ThankYouPageInterface $thankYouPage,
         HomePageInterface $homePage,
         VerificationPageInterface $verificationPage,
-        RegisterElementInterface $registerElement
+        RegisterElementInterface $registerElement,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->loginPage = $loginPage;

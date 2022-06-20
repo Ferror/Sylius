@@ -67,7 +67,7 @@ final class CurrencyContext implements Context
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
                 $currencyCode,
-                implode('", "', $this->homePage->getAvailableCurrencies())
+                implode('", "', $this->homePage->getAvailableCurrencies()),
             ));
         }
     }

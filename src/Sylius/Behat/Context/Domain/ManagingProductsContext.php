@@ -35,7 +35,7 @@ final class ManagingProductsContext implements Context
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
         RepositoryInterface $productVariantRepository,
-        RepositoryInterface $productReviewRepository
+        RepositoryInterface $productReviewRepository,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;

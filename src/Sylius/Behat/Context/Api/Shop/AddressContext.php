@@ -37,7 +37,7 @@ final class AddressContext implements Context
         ApiClientInterface $addressClient,
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->client = $addressClient;
         $this->responseChecker = $responseChecker;
@@ -252,8 +252,8 @@ final class AddressContext implements Context
         Assert::true(
             $this->containsValue(
                 $this->responseChecker->getCollection($this->client->getLastResponse())[0],
-                $value
-            )
+                $value,
+            ),
         );
     }
 
@@ -298,7 +298,7 @@ final class AddressContext implements Context
     {
         Assert::notNull(
             $this->getAddressIriFromAddressBookByFullName($fullName),
-            sprintf('There is no address assigned to %s', $fullName)
+            sprintf('There is no address assigned to %s', $fullName),
         );
     }
 
@@ -382,8 +382,8 @@ final class AddressContext implements Context
         Assert::true(
             $this->responseChecker->hasViolationWithMessage(
                 $this->client->getLastResponse(),
-                'Please select proper province.'
-            )
+                'Please select proper province.',
+            ),
         );
     }
 
@@ -412,7 +412,7 @@ final class AddressContext implements Context
         $userShowResponse = $this->client->show(Resources::CUSTOMERS, (string) $this->sharedStorage->get('user')->getCustomer()->getId());
         Assert::null(
             $this->responseChecker->getValue($userShowResponse, 'defaultAddress'),
-            'Default address should be null'
+            'Default address should be null',
         );
     }
 

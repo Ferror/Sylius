@@ -28,7 +28,7 @@ final class ManagingPromotionsContext implements Context
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        PromotionRepositoryInterface $promotionRepository
+        PromotionRepositoryInterface $promotionRepository,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->promotionRepository = $promotionRepository;
