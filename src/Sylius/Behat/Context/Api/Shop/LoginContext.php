@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Behat\Context\Api\Shop;
 
-use Sylius\Behat\Client\RequestInterface;
 use ApiPlatform\Core\Api\IriConverterInterface;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
 use Sylius\Behat\Client\ApiSecurityClientInterface;
 use Sylius\Behat\Client\Request;
+use Sylius\Behat\Client\RequestInterface;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -50,7 +50,7 @@ final class LoginContext implements Context
         IriConverterInterface $iriConverter,
         AbstractBrowser $shopAuthenticationTokenClient,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->apiSecurityClient = $apiSecurityClient;
         $this->apiClient = $apiClient;
@@ -79,7 +79,7 @@ final class LoginContext implements Context
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode(['email' => $email, 'password' => 'sylius'])
+            json_encode(['email' => $email, 'password' => 'sylius']),
         );
 
         $response = $this->shopAuthenticationTokenClient->getResponse();
@@ -122,7 +122,7 @@ final class LoginContext implements Context
     {
         $this->request = Request::custom(
             sprintf('api/v2/shop/reset-password-requests/%s', $user->getPasswordResetToken()),
-            HttpRequest::METHOD_PATCH
+            HttpRequest::METHOD_PATCH,
         );
     }
 
@@ -272,9 +272,9 @@ final class LoginContext implements Context
         Assert::same(
             $this->responseChecker->getValue(
                 $this->shopAuthenticationTokenClient->getResponse(),
-                'customer'
+                'customer',
             ),
-            $this->iriConverter->getIriFromItem($customer)
+            $this->iriConverter->getIriFromItem($customer),
         );
     }
 

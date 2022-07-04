@@ -27,7 +27,7 @@ final class OrderContext implements Context
 
     public function __construct(
         CustomerRepositoryInterface $customerRepository,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
     ) {
         $this->customerRepository = $customerRepository;
         $this->orderRepository = $orderRepository;

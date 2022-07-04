@@ -32,7 +32,7 @@ final class ManagingExchangeRatesContext implements Context
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
@@ -198,7 +198,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldSeeAnExchangeRateBetweenAndOnTheList(
         string $sourceCurrencyName,
-        string $targetCurrencyName
+        string $targetCurrencyName,
     ): void {
         Assert::true($this->indexPage->isSingleResourceOnPage([
             'sourceCurrency' => $sourceCurrencyName,
@@ -221,7 +221,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         $this->assertExchangeRateIsNotOnTheList(
             $exchangeRate->getSourceCurrency()->getName(),
-            $exchangeRate->getTargetCurrency()->getName()
+            $exchangeRate->getTargetCurrency()->getName(),
         );
     }
 
@@ -269,7 +269,7 @@ final class ManagingExchangeRatesContext implements Context
     {
         Assert::same(
             $this->createPage->getValidationMessage($element),
-            sprintf('Please enter exchange rate %s.', $element)
+            sprintf('Please enter exchange rate %s.', $element),
         );
     }
 
@@ -316,8 +316,8 @@ final class ManagingExchangeRatesContext implements Context
                 'An exchange rate between %s and %s with a ratio of %s has not been found on the list.',
                 $sourceCurrencyName,
                 $targetCurrencyName,
-                $ratio
-            )
+                $ratio,
+            ),
         );
     }
 
@@ -337,8 +337,8 @@ final class ManagingExchangeRatesContext implements Context
             sprintf(
                 'An exchange rate with source currency %s and target currency %s has been found on the list.',
                 $sourceCurrencyName,
-                $targetCurrencyName
-            )
+                $targetCurrencyName,
+            ),
         );
     }
 
@@ -352,7 +352,7 @@ final class ManagingExchangeRatesContext implements Context
         Assert::same(
             $this->indexPage->countItems(),
             (int) $count,
-            'Expected %2$d exchange rates to be on the list, but found %d instead.'
+            'Expected %2$d exchange rates to be on the list, but found %d instead.',
         );
     }
 
@@ -367,8 +367,8 @@ final class ManagingExchangeRatesContext implements Context
             $this->createPage->hasFormValidationError($expectedMessage),
             sprintf(
                 'The validation message "%s" was not found on the page.',
-                $expectedMessage
-            )
+                $expectedMessage,
+            ),
         );
     }
 }

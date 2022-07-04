@@ -43,12 +43,12 @@ final class RegisterGatewayConfigTypePass implements CompilerPassInterface
 
                 $formRegistry->addMethodCall(
                     'add',
-                    ['gateway_config', $attribute['type'], $container->getDefinition($id)->getClass()]
+                    ['gateway_config', $attribute['type'], $container->getDefinition($id)->getClass()],
                 );
             }
         }
 
-        usort($gatewayFactories, fn(array $firstGateway, array $secondGateway): int => $secondGateway['priority'] - $firstGateway['priority']);
+        usort($gatewayFactories, fn (array $firstGateway, array $secondGateway): int => $secondGateway['priority'] - $firstGateway['priority']);
 
         $sortedGatewayFactories = [];
         foreach ($gatewayFactories as $key => $factory) {

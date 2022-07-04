@@ -93,7 +93,7 @@ final class OrderContext implements Context
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ProductVariantResolverInterface $variantResolver,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderFactory = $orderFactory;
@@ -123,7 +123,7 @@ final class OrderContext implements Context
     public function thereIsCustomerThatPlacedOrder(
         CustomerInterface $customer,
         string $orderNumber = null,
-        ChannelInterface $channel = null
+        ChannelInterface $channel = null,
     ): void {
         $order = $this->createOrder($customer, $orderNumber, $channel);
 
@@ -150,7 +150,7 @@ final class OrderContext implements Context
         ProductInterface $product,
         AddressInterface $address,
         ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ) {
         $this->placeOrder($product, $shippingMethod, $address, $paymentMethod, $customer, 1);
         $this->objectManager->flush();
@@ -164,7 +164,7 @@ final class OrderContext implements Context
         string $email,
         AddressInterface $address,
         ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ) {
         $customer = $this->createCustomer($email);
 
@@ -182,7 +182,7 @@ final class OrderContext implements Context
         string $email,
         AddressInterface $address,
         ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ) {
         $customer = $this->createCustomer($email);
 
@@ -216,7 +216,7 @@ final class OrderContext implements Context
             $cart,
             $this->sharedStorage->get('channel'),
             $this->variantResolver->getVariant($product),
-            1
+            1,
         );
 
         $this->orderRepository->add($cart);
@@ -300,7 +300,7 @@ final class OrderContext implements Context
     public function theCustomerChoseShippingToWithPayment(
         ShippingMethodInterface $shippingMethod,
         AddressInterface $address,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ) {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
@@ -337,7 +337,7 @@ final class OrderContext implements Context
      */
     public function theCustomerChoseShippingWithPayment(
         ShippingMethodInterface $shippingMethod,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ) {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
@@ -403,7 +403,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtAnotherProductWithSeparateShipment(
         ProductInterface $product,
-        ShippingMethodInterface $shippingMethod
+        ShippingMethodInterface $shippingMethod,
     ): void {
         $this->addProductVariantToOrder($this->variantResolver->getVariant($product), 1);
 
@@ -492,7 +492,7 @@ final class OrderContext implements Context
         ProductInterface $product,
         ShippingMethodInterface $shippingMethod,
         AddressInterface $address,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ) {
         $customer = $user->getCustomer();
         for ($i = 0; $i < $numberOfOrders; ++$i) {
@@ -512,7 +512,7 @@ final class OrderContext implements Context
         string $orderNumber,
         ProductInterface $product,
         string $state = null,
-        ?ChannelInterface $channel = null
+        ?ChannelInterface $channel = null,
     ): void {
         $order = $this->createOrder($this->createOrProvideCustomer('amba@fatima.org'), $orderNumber, $channel);
 
@@ -583,7 +583,7 @@ final class OrderContext implements Context
         int $orderCount,
         ChannelInterface $channel,
         int $productCount,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product);
     }
@@ -596,7 +596,7 @@ final class OrderContext implements Context
         int $orderCount,
         ChannelInterface $channel,
         int $productCount,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->createOrdersForCustomer($customer, $orderCount, $channel, $productCount, $product, true);
     }
@@ -633,7 +633,7 @@ final class OrderContext implements Context
     public function customersHavePlacedOrdersForTotalOf(
         string $total,
         int $numberOfCustomers = 1,
-        int $numberOfOrders = 1
+        int $numberOfOrders = 1,
     ): void {
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total);
     }
@@ -645,7 +645,7 @@ final class OrderContext implements Context
     public function customersHaveFulfilledOrdersPlacedForTotalOf(
         int $numberOfCustomers,
         int $numberOfOrders,
-        string $total
+        string $total,
     ): void {
         $this->createOrders($numberOfCustomers, $numberOfOrders, $total, true);
     }
@@ -658,7 +658,7 @@ final class OrderContext implements Context
         int $numberOfCustomers,
         int $numberOfOrders,
         string $total,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product);
     }
@@ -670,7 +670,7 @@ final class OrderContext implements Context
         int $numberOfCustomers,
         int $numberOfOrders,
         string $total,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->createOrdersWithProduct($numberOfCustomers, $numberOfOrders, $total, $product, true);
     }
@@ -681,7 +681,7 @@ final class OrderContext implements Context
     public function thenMoreCustomersHavePaidOrdersPlacedForTotalOf(
         int $numberOfCustomers,
         int $numberOfOrders,
-        string $total
+        string $total,
     ): void {
         $this->createPaidOrders($numberOfCustomers, $numberOfOrders, $total);
     }
@@ -694,7 +694,7 @@ final class OrderContext implements Context
         $orderNumber,
         ProductInterface $product,
         $price,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ) {
         $order = $this->createOrder($customer, $orderNumber, $channel);
         $order->setState(OrderInterface::STATE_NEW);
@@ -837,7 +837,7 @@ final class OrderContext implements Context
     private function addProductVariantToOrder(
         ProductVariantInterface $productVariant,
         $quantity = 1,
-        ?ChannelInterface $channel = null
+        ?ChannelInterface $channel = null,
     ) {
         $order = $this->sharedStorage->get('order');
 
@@ -845,7 +845,7 @@ final class OrderContext implements Context
             $order,
             $channel ?? $this->sharedStorage->get('channel'),
             $productVariant,
-            (int) $quantity
+            (int) $quantity,
         );
 
         return $order;
@@ -855,7 +855,7 @@ final class OrderContext implements Context
         OrderInterface $order,
         ChannelInterface $channel,
         ProductVariantInterface $productVariant,
-        int $quantity = 1
+        int $quantity = 1,
     ) {
         /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
@@ -880,7 +880,7 @@ final class OrderContext implements Context
         CustomerInterface $customer,
         $number = null,
         ChannelInterface $channel = null,
-        $localeCode = null
+        $localeCode = null,
     ) {
         $order = $this->createCart($customer, $channel, $localeCode);
 
@@ -901,7 +901,7 @@ final class OrderContext implements Context
     private function createCart(
         CustomerInterface $customer,
         ChannelInterface $channel = null,
-        $localeCode = null
+        $localeCode = null,
     ) {
         /** @var OrderInterface $order */
         $order = $this->orderFactory->createNew();
@@ -966,7 +966,7 @@ final class OrderContext implements Context
         OrderInterface $order,
         ShippingMethodInterface $shippingMethod,
         AddressInterface $address,
-        PaymentMethodInterface $paymentMethod
+        PaymentMethodInterface $paymentMethod,
     ) {
         $order->setShippingAddress($address);
         $order->setBillingAddress(clone $address);
@@ -1036,7 +1036,7 @@ final class OrderContext implements Context
         int $numberOfCustomers,
         int $numberOfOrders,
         string $total,
-        bool $isFulfilled = false
+        bool $isFulfilled = false,
     ): void {
         $customers = $this->generateCustomers($numberOfCustomers);
         $sampleProductVariant = $this->sharedStorage->get('variant');
@@ -1094,7 +1094,7 @@ final class OrderContext implements Context
         int $numberOfOrders,
         string $total,
         ProductInterface $product,
-        bool $isFulfilled = false
+        bool $isFulfilled = false,
     ): void {
         $customers = $this->generateCustomers($numberOfCustomers);
         $sampleProductVariant = $product->getVariants()->first();
@@ -1127,7 +1127,7 @@ final class OrderContext implements Context
         ChannelInterface $channel,
         int $productCount,
         ProductInterface $product,
-        bool $isFulfilled = false
+        bool $isFulfilled = false,
     ): void {
         for ($i = 0; $i < $orderCount; ++$i) {
             $order = $this->createOrder($customer, uniqid('#'), $channel);
@@ -1136,7 +1136,7 @@ final class OrderContext implements Context
                 $order,
                 $channel,
                 $this->variantResolver->getVariant($product),
-                (int) $productCount
+                (int) $productCount,
             );
 
             $order->setState($isFulfilled ? OrderInterface::STATE_FULFILLED : OrderInterface::STATE_NEW);
@@ -1169,7 +1169,7 @@ final class OrderContext implements Context
         AddressInterface $address,
         PaymentMethodInterface $paymentMethod,
         CustomerInterface $customer,
-        int $number
+        int $number,
     ): void {
         /** @var ProductVariantInterface $variant */
         $variant = $this->variantResolver->getVariant($product);

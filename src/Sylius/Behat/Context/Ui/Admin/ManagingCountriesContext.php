@@ -36,7 +36,7 @@ final class ManagingCountriesContext implements Context
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;

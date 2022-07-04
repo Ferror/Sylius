@@ -42,7 +42,7 @@ final class LocaleContext implements Context
         FactoryInterface $localeFactory,
         RepositoryInterface $localeRepository,
         ObjectManager $localeManager,
-        ObjectManager $channelManager
+        ObjectManager $channelManager,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->localeConverter = $localeConverter;

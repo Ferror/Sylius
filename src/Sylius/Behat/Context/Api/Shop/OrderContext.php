@@ -53,7 +53,7 @@ final class OrderContext implements Context
         ResponseCheckerInterface $responseChecker,
         SharedStorageInterface $sharedStorage,
         IriConverterInterface $iriConverter,
-        SecurityServiceInterface $securityService
+        SecurityServiceInterface $securityService,
     ) {
         $this->shopOrderClient = $shopOrderClient;
         $this->adminOrderClient = $adminOrderClient;
@@ -75,10 +75,10 @@ final class OrderContext implements Context
             \sprintf(
                 '/api/v2/shop/account/orders/%s/payments/%s',
                 $order->getTokenValue(),
-                (string) $order->getPayments()->first()->getId()
+                (string) $order->getPayments()->first()->getId(),
             ),
             HttpRequest::METHOD_PATCH,
-            $this->shopOrderClient->getToken()
+            $this->shopOrderClient->getToken(),
         );
 
         $request->setContent(['paymentMethod' => $this->iriConverter->getIriFromItem($paymentMethod)]);
@@ -116,11 +116,11 @@ final class OrderContext implements Context
         Assert::same($response->getStatusCode(), Response::HTTP_OK);
         Assert::same(
             $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'checkoutState'),
-            OrderCheckoutStates::STATE_COMPLETED
+            OrderCheckoutStates::STATE_COMPLETED,
         );
         Assert::same(
             $this->sharedStorage->get('order_number'),
-            $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'number')
+            $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'number'),
         );
     }
 
@@ -141,7 +141,7 @@ final class OrderContext implements Context
         string $postcode,
         string $city,
         CountryInterface $country,
-        string $addressType
+        string $addressType,
     ): void {
         $address = $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), ($addressType . 'Address'));
 
@@ -186,7 +186,7 @@ final class OrderContext implements Context
     public function theShipmentStatusShouldBe(
         string $elementType,
         string $elementStatus,
-        int $position = 0
+        int $position = 0,
     ): void {
         $resources = $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), $elementType . 's');
 
@@ -210,9 +210,9 @@ final class OrderContext implements Context
             StringInflector::codeToName(
                 $this->responseChecker->getValue(
                     $this->shopOrderClient->getLastResponse(),
-                    $elementType . 'State'
-                )
-            )
+                    $elementType . 'State',
+                ),
+            ),
         );
     }
 
@@ -256,7 +256,7 @@ final class OrderContext implements Context
     public function iShouldSeeIHaveToPayForThisOrder(int $paymentAmount): void
     {
         $response = $this->shopOrderClient->showByIri(
-            $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'payments')[0]['@id']
+            $this->responseChecker->getValue($this->shopOrderClient->getLastResponse(), 'payments')[0]['@id'],
         );
 
         Assert::same($this->responseChecker->getValue($response, 'amount'), $paymentAmount);
@@ -360,13 +360,13 @@ final class OrderContext implements Context
     public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
         AdminUserInterface $user,
         string $notes,
-        OrderInterface $order
+        OrderInterface $order,
     ): void {
         $this->securityService->logIn($user);
 
         Assert::same(
             $notes,
-            $this->responseChecker->getValue($this->adminOrderClient->show($order->getTokenValue()), 'notes')
+            $this->responseChecker->getValue($this->adminOrderClient->show($order->getTokenValue()), 'notes'),
         );
     }
 
@@ -376,13 +376,13 @@ final class OrderContext implements Context
     public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
         AdminUserInterface $user,
         OrderInterface $order,
-        string $currency
+        string $currency,
     ): void {
         $this->securityService->logIn($user);
 
         Assert::same(
             $currency,
-            $this->responseChecker->getValue($this->adminOrderClient->show($order->getTokenValue()), 'currencyCode')
+            $this->responseChecker->getValue($this->adminOrderClient->show($order->getTokenValue()), 'currencyCode'),
         );
     }
 
@@ -397,7 +397,7 @@ final class OrderContext implements Context
     {
         $response = $this->shopOrderClient->customAction(
             sprintf('/api/v2/shop/orders/%s/items/%s/adjustments', $this->sharedStorage->get('cart_token'), $itemId),
-            HttpRequest::METHOD_GET
+            HttpRequest::METHOD_GET,
         );
 
         return $this->responseChecker->getCollection($response);
@@ -422,7 +422,7 @@ final class OrderContext implements Context
         if (!isset($item['variant'])) {
             throw new \InvalidArgumentException(
                 'Expected array to have variant key, but this key is missing. Current array: ' .
-                json_encode($item)
+                json_encode($item),
             );
         }
 

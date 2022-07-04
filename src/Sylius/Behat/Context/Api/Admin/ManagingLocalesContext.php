@@ -26,7 +26,7 @@ final class ManagingLocalesContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
@@ -64,7 +64,7 @@ final class ManagingLocalesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Locale could not be created'
+            'Locale could not be created',
         );
     }
 
@@ -76,7 +76,7 @@ final class ManagingLocalesContext implements Context
         $response = $this->client->index();
         Assert::true(
             $this->responseChecker->hasItemWithValue($response, 'code', $localeCode),
-            sprintf('There is no locale with code "%s"', $localeCode)
+            sprintf('There is no locale with code "%s"', $localeCode),
         );
     }
 
@@ -89,7 +89,7 @@ final class ManagingLocalesContext implements Context
         $response = $this->client->create();
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
-            'Locale has been created successfully, but it should not'
+            'Locale has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: Locale code must be unique.');
     }
@@ -102,7 +102,7 @@ final class ManagingLocalesContext implements Context
         $response = $this->client->getLastResponse();
         Assert::false(
             $this->responseChecker->isCreationSuccessful($response),
-            'Locale has been created successfully, but it should not'
+            'Locale has been created successfully, but it should not',
         );
         Assert::same($this->responseChecker->getError($response), 'code: Please choose locale code.');
     }

@@ -36,7 +36,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::SUB_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         ));
     }
 
@@ -44,7 +44,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         FakeChannelCodeProviderInterface $fakeHostnameProvider,
         HttpKernelInterface $kernel,
         Request $request,
-        Response $response
+        Response $response,
     ): void {
         $fakeHostnameProvider->getCode($request)->willReturn(null);
 
@@ -52,7 +52,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         ));
     }
 
@@ -61,13 +61,13 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
         HttpKernelInterface $kernel,
         Request $request,
         Response $response,
-        ResponseHeaderBag $responseHeaderBag
+        ResponseHeaderBag $responseHeaderBag,
     ): void {
         $fakeHostnameProvider->getCode($request)->willReturn('fake_channel_code');
 
         $response->headers = $responseHeaderBag;
         $responseHeaderBag
-            ->setCookie(Argument::that(static fn(Cookie $cookie): bool => $cookie->getName() === '_channel_code' && $cookie->getValue() === 'fake_channel_code'))
+            ->setCookie(Argument::that(static fn (Cookie $cookie): bool => $cookie->getName() === '_channel_code' && $cookie->getValue() === 'fake_channel_code'))
             ->shouldBeCalled()
         ;
 
@@ -75,7 +75,7 @@ final class FakeChannelPersisterSpec extends ObjectBehavior
             $kernel->getWrappedObject(),
             $request->getWrappedObject(),
             HttpKernelInterface::MASTER_REQUEST,
-            $response->getWrappedObject()
+            $response->getWrappedObject(),
         ));
     }
 }

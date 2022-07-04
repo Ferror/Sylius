@@ -34,7 +34,7 @@ final class ManagingProductVariantsContext implements Context
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
@@ -66,8 +66,8 @@ final class ManagingProductVariantsContext implements Context
         $this->client->addRequestData('channelPricings', [
             $channel->getCode() => [
                 'price' => $price,
-                'channelCode' => $channel->getCode()
-            ]
+                'channelCode' => $channel->getCode(),
+            ],
         ]);
     }
 
@@ -96,7 +96,7 @@ final class ManagingProductVariantsContext implements Context
     public function iChangeThePriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
         int $price,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updateChannelPricingField($variant, $channel, $price, 'price');
     }
@@ -107,7 +107,7 @@ final class ManagingProductVariantsContext implements Context
     public function iChangeTheOriginalPriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
         int $originalPrice,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updateChannelPricingField($variant, $channel, $originalPrice, 'originalPrice');
     }
@@ -117,7 +117,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iRemoveTheOriginalPriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updateChannelPricingField($variant, $channel, null, 'originalPrice');
     }
@@ -129,7 +129,7 @@ final class ManagingProductVariantsContext implements Context
         string $name,
         int $price,
         ProductInterface $product,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->createNewVariantWithPrice($name, $price, $product, $channel);
     }
@@ -141,7 +141,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Product Variant could not be created'
+            'Product Variant could not be created',
         );
     }
 
@@ -179,7 +179,7 @@ final class ManagingProductVariantsContext implements Context
         ProductVariantInterface $variant,
         ChannelInterface $channel,
         ?int $price,
-        string $field
+        string $field,
     ): void {
         $this->client->buildUpdateRequest($variant->getCode());
 
@@ -194,7 +194,7 @@ final class ManagingProductVariantsContext implements Context
         string $name,
         int $price,
         ProductInterface $product,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->client->buildCreateRequest();
         $this->client->addRequestData('product', $this->iriConverter->getIriFromItem($product));
@@ -203,8 +203,8 @@ final class ManagingProductVariantsContext implements Context
         $this->client->addRequestData('channelPricings', [
             $channel->getCode() => [
                 'price' => $price,
-                'channelCode' => $channel->getCode()
-            ]
+                'channelCode' => $channel->getCode(),
+            ],
         ]);
 
         $this->client->create();

@@ -22,12 +22,12 @@ use Sylius\Behat\Page\Admin\CatalogPromotion\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\CatalogPromotionInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
 final class ManagingCatalogPromotionsContext implements Context
@@ -53,7 +53,7 @@ final class ManagingCatalogPromotionsContext implements Context
         ShowPageInterface $showPage,
         FormElementInterface $formElement,
         SharedStorageInterface $sharedStorage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
@@ -233,7 +233,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnVariants(ProductVariantInterface ...$variants): void
     {
-        $variantCodes = array_map(function(ProductVariantInterface $variant) {
+        $variantCodes = array_map(function (ProductVariantInterface $variant) {
             return $variant->getCode();
         }, $variants);
 
@@ -247,7 +247,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iAddScopeThatAppliesOnTaxons(TaxonInterface ...$taxons): void
     {
-        $taxonsCodes = array_map(function(TaxonInterface $taxon) {
+        $taxonsCodes = array_map(function (TaxonInterface $taxon) {
             return $taxon->getCode();
         }, $taxons);
 
@@ -311,7 +311,7 @@ final class ManagingCatalogPromotionsContext implements Context
         int $priority,
         ProductInterface $product,
         string $discount,
-        string $channel
+        string $channel,
     ): void {
         $this->createCatalogPromotion($name, $priority, true, $product, $discount, $channel);
     }
@@ -324,7 +324,7 @@ final class ManagingCatalogPromotionsContext implements Context
         int $priority,
         ProductInterface $product,
         string $discount,
-        string $channel
+        string $channel,
     ): void {
         $this->createCatalogPromotion($name, $priority, false, $product, $discount, $channel);
     }
@@ -381,7 +381,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iEditCatalogPromotionToBeAppliedOnTaxon(
         CatalogPromotionInterface $catalogPromotion,
-        TaxonInterface $taxon
+        TaxonInterface $taxon,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -395,7 +395,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iEditCatalogPromotionToBeAppliedOnProduct(
         CatalogPromotionInterface $catalogPromotion,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -429,7 +429,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iEditCatalogPromotionToHaveFixedDiscountInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         string $discount,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
         $this->formElement->chooseActionType('Fixed discount');
@@ -444,7 +444,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iEditItToHaveFixedDiscountInTheChannel(
         string $discount,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->formElement->chooseActionType('Fixed discount');
         $this->formElement->specifyLastActionDiscountForChannel($discount, $channel);
@@ -538,7 +538,7 @@ final class ManagingCatalogPromotionsContext implements Context
      * @When I add invalid fixed discount action with non number in amount for the :channel channel
      */
     public function iAddInvalidFixedDiscountActionWithNonNumberInAmountForTheChannel(
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->formElement->addAction();
         $this->formElement->chooseActionType('Fixed discount');
@@ -551,7 +551,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeThisCatalogPromotionUnavailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -566,7 +566,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function iMakeThisCatalogPromotionAvailableInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -582,7 +582,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iSwitchThisCatalogPromotionAvailabilityFromTheChannelToTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         ChannelInterface $removedChannel,
-        ChannelInterface $addedChannel
+        ChannelInterface $addedChannel,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -648,7 +648,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function iShouldBeNotifiedThatADiscountAmountShouldBeConfiguredForAtLeasOneChannel(): void
     {
         Assert::true($this->formElement->hasOnlyOneValidationMessage(
-            'Configuration for one of the required channels is not provided.'
+            'Configuration for one of the required channels is not provided.',
         ));
     }
 
@@ -672,7 +672,7 @@ final class ManagingCatalogPromotionsContext implements Context
         foreach ($names as $name) {
             Assert::true(
                 $this->indexPage->isSingleResourceOnPage(['name' => $name]),
-                sprintf('Cannot find catalog promotions with name "%s" in the list', $name)
+                sprintf('Cannot find catalog promotions with name "%s" in the list', $name),
             );
         }
     }
@@ -686,8 +686,10 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'startDate' => $startDate, 'endDate' => $endDate]),
             sprintf(
                 'Cannot find catalog promotions with name "%s" operating between "%s" and "%s" in the list',
-                $name, $startDate, $endDate
-            )
+                $name,
+                $startDate,
+                $endDate,
+            ),
         );
     }
 
@@ -700,8 +702,9 @@ final class ManagingCatalogPromotionsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'priority' => $priority]),
             sprintf(
                 'Cannot find catalog promotions with name "%s" and priority %s in the list',
-                $name, $priority
-            )
+                $name,
+                $priority,
+            ),
         );
     }
 
@@ -712,7 +715,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $name, 'code' => $code]),
-            sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name)
+            sprintf('Cannot find catalog promotions with code "%s" and name "%s" in the list', $code, $name),
         );
     }
 
@@ -723,7 +726,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['priority' => $priority]),
-            sprintf('Cannot find catalog promotions with priority "%d"', $priority)
+            sprintf('Cannot find catalog promotions with priority "%d"', $priority),
         );
     }
 
@@ -732,7 +735,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldHaveVariantBasedScope(
         CatalogPromotionInterface $catalogPromotion,
-        ProductVariantInterface ...$variants
+        ProductVariantInterface ...$variants,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -750,7 +753,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function itShouldHaveTaxonsBasedScope(
         CatalogPromotionInterface $catalogPromotion,
-        TaxonInterface ...$taxons
+        TaxonInterface ...$taxons,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -776,7 +779,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function theCatalogPromotionShouldApplyToAllVariantsOfProduct(
         CatalogPromotionInterface $catalogPromotion,
-        ProductInterface $product
+        ProductInterface $product,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -833,7 +836,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function theCatalogPromotionShouldHaveFixedDiscountInTheChannel(
         CatalogPromotionInterface $catalogPromotion,
         string $amount,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['id' => $catalogPromotion->getId()]);
 
@@ -874,7 +877,7 @@ final class ManagingCatalogPromotionsContext implements Context
     public function theCatalogPromotionShouldOperateBetweenDates(
         CatalogPromotionInterface $catalogPromotion,
         string $startDate,
-        string $endDate
+        string $endDate,
     ): void {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage([
@@ -888,7 +891,7 @@ final class ManagingCatalogPromotionsContext implements Context
      * @Then /^(it) should operate between yesterday and tomorrow$/
      */
     public function theCatalogPromotionShouldOperateBetweenYesterdayAndTomorrow(
-        CatalogPromotionInterface $catalogPromotion
+        CatalogPromotionInterface $catalogPromotion,
     ): void {
         $this->indexPage->open();
         Assert::true($this->indexPage->isSingleResourceOnPage([
@@ -909,7 +912,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->indexPage->open();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(
-            ['name' => $catalogPromotion->getName(), 'state' => $state]
+            ['name' => $catalogPromotion->getName(), 'state' => $state],
         ));
     }
 
@@ -918,7 +921,7 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thisCatalogPromotionShouldBeAvailableInChannel(
         CatalogPromotionInterface $catalogPromotion,
-        string $channelName
+        string $channelName,
     ): void {
         $this->indexPage->open();
 
@@ -930,10 +933,10 @@ final class ManagingCatalogPromotionsContext implements Context
      */
     public function thisCatalogPromotionShouldNotBeAvailableInChannel(
         CatalogPromotionInterface $catalogPromotion,
-        string $channelName
+        string $channelName,
     ): void {
         Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotion->getName(), 'channels' => $channelName])
+            $this->indexPage->isSingleResourceOnPage(['name' => $catalogPromotion->getName(), 'channels' => $channelName]),
         );
     }
 
@@ -944,7 +947,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Catalog promotion has been successfully created.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -973,7 +976,7 @@ final class ManagingCatalogPromotionsContext implements Context
         $this->iBrowseCatalogPromotions();
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $catalogPromotion->getCode(), 'name' => $name,])
+            $this->indexPage->isSingleResourceOnPage(['code' => $catalogPromotion->getCode(), 'name' => $name]),
         );
     }
 
@@ -984,7 +987,7 @@ final class ManagingCatalogPromotionsContext implements Context
         CatalogPromotionInterface $catalogPromotion,
         string $field,
         string $value,
-        string $localeCode
+        string $localeCode,
     ): void {
         $fieldsMapping = [
             'labelled' => 'label',
@@ -1017,7 +1020,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::same(
             $this->formElement->getValidationMessage(),
-            sprintf('Provided configuration contains errors. Please add at least 1 %s.', $entity)
+            sprintf('Provided configuration contains errors. Please add at least 1 %s.', $entity),
         );
     }
 
@@ -1028,7 +1031,7 @@ final class ManagingCatalogPromotionsContext implements Context
     {
         Assert::same(
             $this->formElement->getValidationMessage(),
-            'The catalog promotion cannot be edited as it is currently being processed.'
+            'The catalog promotion cannot be edited as it is currently being processed.',
         );
     }
 
@@ -1143,7 +1146,7 @@ final class ManagingCatalogPromotionsContext implements Context
         bool $exclusive,
         ProductInterface $product,
         string $discount,
-        string $channel
+        string $channel,
     ): void {
         $this->createPage->open();
         $this->createPage->specifyCode(StringInflector::nameToCode($name));

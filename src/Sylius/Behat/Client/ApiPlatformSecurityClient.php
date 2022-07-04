@@ -58,7 +58,7 @@ final class ApiPlatformSecurityClient implements ApiSecurityClientInterface
             [],
             [],
             ['CONTENT_TYPE' => 'application/json', 'HTTP_ACCEPT' => 'application/json'],
-            json_encode($this->request['body'])
+            json_encode($this->request['body']),
         );
 
         $response = $this->client->getResponse();

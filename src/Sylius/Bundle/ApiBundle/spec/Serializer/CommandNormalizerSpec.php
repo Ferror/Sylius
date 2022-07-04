@@ -33,7 +33,12 @@ final class CommandNormalizerSpec extends ObjectBehavior
     function it_supports_normalization_if_data_has_get_class_method_and_it_is_missing_constructor_arguments_exception(): void
     {
         $this->supportsNormalization(
-            new class() { public function getClass(): string { return MissingConstructorArgumentsException::class; }}
+            new class() {
+                public function getClass(): string
+                {
+                    return MissingConstructorArgumentsException::class;
+                }
+            },
         )->shouldReturn(true);
     }
 
@@ -45,7 +50,12 @@ final class CommandNormalizerSpec extends ObjectBehavior
     function it_does_not_support_normalization_if_data_class_is_not_missing_constructor_arguments_exception(): void
     {
         $this
-            ->supportsNormalization(new class() { public function getClass(): string { return \Exception::class; }})
+            ->supportsNormalization(new class() {
+                public function getClass(): string
+                {
+                    return \Exception::class;
+                }
+            })
             ->shouldReturn(false)
         ;
     }
@@ -54,9 +64,14 @@ final class CommandNormalizerSpec extends ObjectBehavior
     {
         $this
             ->supportsNormalization(
-                new class() { public function getClass(): string { return MissingConstructorArgumentsException::class; }},
+                new class() {
+                    public function getClass(): string
+                    {
+                        return MissingConstructorArgumentsException::class;
+                    }
+                },
                 null,
-                ['sylius_command_normalizer_already_called' => true]
+                ['sylius_command_normalizer_already_called' => true],
             )
             ->shouldReturn(false)
         ;
@@ -69,7 +84,7 @@ final class CommandNormalizerSpec extends ObjectBehavior
 
     function it_normalizes_response_for_missing_constructor_arguments_exception(
         NormalizerInterface $baseNormalizer,
-        \stdClass $object
+        \stdClass $object,
     ): void {
         $baseNormalizer
             ->normalize($object, null, ['sylius_command_normalizer_already_called' => true])

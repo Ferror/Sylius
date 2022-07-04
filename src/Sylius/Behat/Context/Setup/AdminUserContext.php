@@ -43,7 +43,7 @@ final class AdminUserContext implements Context
         UserRepositoryInterface $userRepository,
         ImageUploaderInterface $imageUploader,
         ObjectManager $objectManager,
-        \ArrayAccess $minkParameters
+        \ArrayAccess $minkParameters,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userFactory = $userFactory;

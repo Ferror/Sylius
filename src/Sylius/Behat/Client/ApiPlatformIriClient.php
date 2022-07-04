@@ -29,7 +29,7 @@ final class ApiPlatformIriClient implements ApiIriClientInterface
     public function __construct(
         AbstractBrowser $client,
         SharedStorageInterface $sharedStorage,
-        string $authorizationHeader
+        string $authorizationHeader,
     ) {
         $this->client = $client;
         $this->sharedStorage = $sharedStorage;
@@ -52,7 +52,7 @@ final class ApiPlatformIriClient implements ApiIriClientInterface
             $request->parameters(),
             $request->files(),
             $request->headers(),
-            $request->content() ?? null
+            $request->content() ?? null,
         );
 
         return $this->client->getResponse();

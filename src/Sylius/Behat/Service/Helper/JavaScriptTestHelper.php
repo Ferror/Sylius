@@ -40,7 +40,7 @@ final class JavaScriptTestHelper implements JavaScriptTestHelperInterface
         NotificationCheckerInterface $notificationChecker,
         NotificationType $type,
         string $message,
-        ?int $timeout = null
+        ?int $timeout = null,
     ): void {
         $callable = function () use ($notificationChecker, $message, $type): void {
             $notificationChecker->checkNotification($message, $type);

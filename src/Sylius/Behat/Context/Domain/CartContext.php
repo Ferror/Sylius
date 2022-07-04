@@ -27,7 +27,7 @@ final class CartContext implements Context
 
     public function __construct(
         ObjectManager $orderManager,
-        ExpiredCartsRemoverInterface $expiredCartsRemover
+        ExpiredCartsRemoverInterface $expiredCartsRemover,
     ) {
         $this->orderManager = $orderManager;
         $this->expiredCartsRemover = $expiredCartsRemover;

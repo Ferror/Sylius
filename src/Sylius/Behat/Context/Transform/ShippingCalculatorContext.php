@@ -35,7 +35,7 @@ final class ShippingCalculatorContext implements Context
     {
         $flippedCalculators = array_flip(array_map(
             function (string $translationKey): string { return $this->translator->trans($translationKey); },
-            $this->shippingCalculators
+            $this->shippingCalculators,
         ));
 
         return $flippedCalculators[$shippingCalculator];

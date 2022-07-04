@@ -27,7 +27,7 @@ final class ManagingPromotionsContext implements Context
 
     public function __construct(
         ApiClientInterface $client,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
@@ -83,7 +83,7 @@ final class ManagingPromotionsContext implements Context
     {
         Assert::same(
             count($this->responseChecker->getCollection($this->client->getLastResponse())),
-            $amount
+            $amount,
         );
     }
 
@@ -95,7 +95,7 @@ final class ManagingPromotionsContext implements Context
         $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'name',
-            $promotionName
+            $promotionName,
         ));
 
         Assert::notNull($returnedPromotion, sprintf('There is no promotion %s in registry', $promotionName));
@@ -109,12 +109,12 @@ final class ManagingPromotionsContext implements Context
         $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'name',
-            $promotion->getName()
+            $promotion->getName(),
         ));
 
         Assert::true(
             $returnedPromotion['couponBased'],
-            sprintf('The promotion %s isn\'t coupon based', $promotion->getName())
+            sprintf('The promotion %s isn\'t coupon based', $promotion->getName()),
         );
     }
 
@@ -126,7 +126,7 @@ final class ManagingPromotionsContext implements Context
         $returnedPromotion = current($this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'name',
-            $promotion->getName()
+            $promotion->getName(),
         ));
 
         Assert::keyExists($returnedPromotion, 'coupons');
@@ -148,7 +148,7 @@ final class ManagingPromotionsContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Promotion still exists, but it should not'
+            'Promotion still exists, but it should not',
         );
     }
 
@@ -162,7 +162,7 @@ final class ManagingPromotionsContext implements Context
 
         Assert::false(
             $this->responseChecker->hasItemWithValue($response, 'name', $promotionName),
-            sprintf('Promotion with name %s still exist', $promotionName)
+            sprintf('Promotion with name %s still exist', $promotionName),
         );
     }
 
@@ -180,7 +180,7 @@ final class ManagingPromotionsContext implements Context
     public function thePromotionShouldNotAppliesToDiscountedItems(PromotionInterface $promotion): void
     {
         Assert::false(
-            $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'appliesToDiscounted')
+            $this->responseChecker->getValue($this->client->show($promotion->getCode()), 'appliesToDiscounted'),
         );
     }
 }

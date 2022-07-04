@@ -15,10 +15,8 @@ namespace Sylius\Behat\Context\Api\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Client\ApiClientInterface;
-use Sylius\Behat\Client\Request;
 use Sylius\Behat\Client\ResponseCheckerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Symfony\Component\HttpFoundation\Request as HttpRequest;
 use Webmozart\Assert\Assert;
 
 final class PromotionContext implements Context
@@ -32,7 +30,7 @@ final class PromotionContext implements Context
     public function __construct(
         ApiClientInterface $ordersClient,
         SharedStorageInterface $sharedStorage,
-        ResponseCheckerInterface $responseChecker
+        ResponseCheckerInterface $responseChecker,
     ) {
         $this->ordersClient = $ordersClient;
         $this->sharedStorage = $sharedStorage;

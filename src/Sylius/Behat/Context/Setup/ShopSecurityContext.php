@@ -34,7 +34,7 @@ final class ShopSecurityContext implements Context
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
         ExampleFactoryInterface $userFactory,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;

@@ -29,7 +29,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     {
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode),
-            $name
+            $name,
         );
     }
 
@@ -132,7 +132,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         if (null !== $imageTypeElement && null !== $imageSourceElement) {
             $this->saveImageUrlForType(
                 $imageTypeElement->getValue(),
-                $imageSourceElement->getAttribute('src')
+                $imageSourceElement->getAttribute('src'),
             );
         }
 

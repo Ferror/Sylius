@@ -53,13 +53,13 @@ final class TaxonomyContext implements Context
         ObjectManager $objectManager,
         ImageUploaderInterface $imageUploader,
         TaxonSlugGeneratorInterface $taxonSlugGenerator,
-        $minkParameters
+        $minkParameters,
     ) {
         if (!is_array($minkParameters) && !$minkParameters instanceof \ArrayAccess) {
             throw new \InvalidArgumentException(sprintf(
                 '"$minkParameters" passed to "%s" has to be an array or implement "%s".',
                 self::class,
-                \ArrayAccess::class
+                \ArrayAccess::class,
             ));
         }
 

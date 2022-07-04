@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\PromotionBundle\Tests\Command;
 
-use Symfony\Component\Console\Command\Command;
 use InvalidArgumentException;
-use Sylius\Bundle\PromotionBundle\Command\GenerateCouponsCommand;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Tester\CommandTester;
 
 class GenerateCouponsCommandTest extends KernelTestCase
@@ -111,7 +110,8 @@ class GenerateCouponsCommandTest extends KernelTestCase
         $this->promotionRepository
             ->method('findOneBy')
             ->with($this->equalTo(['code' => 'VALID_PROMOTION']))
-            ->willReturn($promotion);
+            ->willReturn($promotion)
+        ;
 
         $expectedInstructions = new PromotionCouponGeneratorInstruction();
         $expectedInstructions->setAmount(10);
@@ -121,7 +121,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
             ->method('generate')
             ->with(
                 $this->equalTo($promotion),
-                $this->equalTo($expectedInstructions)
+                $this->equalTo($expectedInstructions),
             )
             ->willThrowException(new InvalidArgumentException('Could not generate'))
         ;
@@ -149,7 +149,8 @@ class GenerateCouponsCommandTest extends KernelTestCase
         $this->promotionRepository
             ->method('findOneBy')
             ->with($this->equalTo(['code' => 'VALID_PROMOTION']))
-            ->willReturn($promotion);
+            ->willReturn($promotion)
+        ;
 
         $expectedInstructions = new PromotionCouponGeneratorInstruction();
         $expectedInstructions->setAmount(5);
@@ -160,7 +161,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
             ->method('generate')
             ->with(
                 $this->equalTo($promotion),
-                $this->equalTo($expectedInstructions)
+                $this->equalTo($expectedInstructions),
             )
         ;
 
@@ -187,7 +188,8 @@ class GenerateCouponsCommandTest extends KernelTestCase
         $this->promotionRepository
             ->method('findOneBy')
             ->with($this->equalTo(['code' => 'VALID_PROMOTION']))
-            ->willReturn($promotion);
+            ->willReturn($promotion)
+        ;
 
         $expectedInstructions = new PromotionCouponGeneratorInstruction();
         $expectedInstructions->setAmount(10);
@@ -198,7 +200,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
             ->method('generate')
             ->with(
                 $this->equalTo($promotion),
-                $this->equalTo($expectedInstructions)
+                $this->equalTo($expectedInstructions),
             )
         ;
 
@@ -208,7 +210,7 @@ class GenerateCouponsCommandTest extends KernelTestCase
                 'promotion-code' => 'VALID_PROMOTION',
                 'count' => 10,
                 '--length' => 7,
-            ]
+            ],
         );
 
         // the output of the command in the console

@@ -27,7 +27,7 @@ final class ContactContext implements Context
 
     public function __construct(
         ContactPageInterface $contactPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->contactPage = $contactPage;
         $this->notificationChecker = $notificationChecker;
@@ -75,7 +75,7 @@ final class ContactContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Your contact request has been submitted successfully.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -102,7 +102,7 @@ final class ContactContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'A problem occurred while sending the contact request. Please try again later.',
-            NotificationType::failure()
+            NotificationType::failure(),
         );
     }
 }

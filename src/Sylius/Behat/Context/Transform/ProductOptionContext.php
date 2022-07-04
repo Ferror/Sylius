@@ -38,7 +38,7 @@ final class ProductOptionContext implements Context
         Assert::eq(
             count($productOptions),
             1,
-            sprintf('%d product options has been found with name "%s".', count($productOptions), $productOptionName)
+            sprintf('%d product options has been found with name "%s".', count($productOptions), $productOptionName),
         );
 
         return $productOptions[0];

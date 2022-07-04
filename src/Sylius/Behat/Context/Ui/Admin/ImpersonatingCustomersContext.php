@@ -35,7 +35,7 @@ final class ImpersonatingCustomersContext implements Context
         ShowPageInterface $customerShowPage,
         DashboardPageInterface $dashboardPage,
         HomePageInterface $homePage,
-        ImpersonateUserPageInterface $impersonateUserPage
+        ImpersonateUserPageInterface $impersonateUserPage,
     ) {
         $this->customerShowPage = $customerShowPage;
         $this->dashboardPage = $dashboardPage;

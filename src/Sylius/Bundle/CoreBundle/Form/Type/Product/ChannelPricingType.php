@@ -18,7 +18,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -30,7 +29,7 @@ final class ChannelPricingType extends AbstractResourceType
     public function __construct(
         string $dataClass,
         array $validationGroups,
-        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $channelPricingRepository = null
+        private ?\Sylius\Component\Resource\Repository\RepositoryInterface $channelPricingRepository = null,
     ) {
         parent::__construct($dataClass, $validationGroups);
     }
@@ -92,7 +91,7 @@ final class ChannelPricingType extends AbstractResourceType
             ->setAllowedTypes('product_variant', ['null', ProductVariantInterface::class])
 
             ->setDefaults([
-                'label' => fn(Options $options): string => $options['channel']->getName(),
+                'label' => fn (Options $options): string => $options['channel']->getName(),
             ])
         ;
     }

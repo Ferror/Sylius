@@ -60,7 +60,7 @@ final class LocaleContext implements Context
         Assert::isInstanceOf(
             $locale,
             LocaleInterface::class,
-            sprintf('Cannot find "%s" locale.', $name)
+            sprintf('Cannot find "%s" locale.', $name),
         );
 
         return $locale;

@@ -33,7 +33,7 @@ final class PaypalContext implements Context
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         ShowPageInterface $orderDetails,
         CompletePageInterface $summaryPage,
-        PaypalApiMocker $paypalApiMocker
+        PaypalApiMocker $paypalApiMocker,
     ) {
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
         $this->orderDetails = $orderDetails;

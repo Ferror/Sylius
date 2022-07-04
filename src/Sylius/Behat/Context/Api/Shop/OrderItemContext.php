@@ -37,7 +37,7 @@ final class OrderItemContext implements Context
         ApiClientInterface $orderItemsClient,
         ApiClientInterface $orderItemUnitsClient,
         ResponseCheckerInterface $responseChecker,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->orderItemsClient = $orderItemsClient;
         $this->orderItemUnitsClient = $orderItemUnitsClient;

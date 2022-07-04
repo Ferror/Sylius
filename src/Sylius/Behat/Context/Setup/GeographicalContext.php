@@ -42,7 +42,7 @@ final class GeographicalContext implements Context
         FactoryInterface $provinceFactory,
         RepositoryInterface $countryRepository,
         CountryNameConverterInterface $countryNameConverter,
-        ObjectManager $countryManager
+        ObjectManager $countryManager,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->countryFactory = $countryFactory;

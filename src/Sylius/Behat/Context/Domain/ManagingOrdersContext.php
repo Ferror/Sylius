@@ -51,7 +51,7 @@ final class ManagingOrdersContext implements Context
         RepositoryInterface $adjustmentRepository,
         ObjectManager $orderManager,
         ProductVariantResolverInterface $variantResolver,
-        UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
+        UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;

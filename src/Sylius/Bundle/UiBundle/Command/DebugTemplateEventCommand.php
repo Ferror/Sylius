@@ -59,14 +59,14 @@ final class DebugTemplateEventCommand extends Command
         $io->table(
             ['Block name', 'Template', 'Priority', 'Enabled'],
             array_map(
-                static fn(TemplateBlock $templateBlock): array => [
+                static fn (TemplateBlock $templateBlock): array => [
                     $templateBlock->getName(),
                     $templateBlock->getTemplate(),
                     $templateBlock->getPriority(),
                     $templateBlock->isEnabled() ? 'TRUE' : 'FALSE',
                 ],
-                $this->templateBlockRegistry->all()[$eventName] ?? []
-            )
+                $this->templateBlockRegistry->all()[$eventName] ?? [],
+            ),
         );
 
         return 0;

@@ -26,14 +26,10 @@ class ProductOptionValue implements ProductOptionValueInterface, \Stringable
     /** @var mixed */
     protected $id;
 
-    /**
-     * @var string|null
-     */
+    /** @var string|null */
     protected $code;
 
-    /**
-     * @var ProductOptionInterface|null
-     */
+    /** @var ProductOptionInterface|null */
     protected $option;
 
     public function __construct()
@@ -88,7 +84,7 @@ class ProductOptionValue implements ProductOptionValueInterface, \Stringable
     {
         if (null === $this->option) {
             throw new \BadMethodCallException(
-                'The option have not been created yet so you cannot access proxy methods.'
+                'The option have not been created yet so you cannot access proxy methods.',
             );
         }
 
@@ -102,7 +98,7 @@ class ProductOptionValue implements ProductOptionValueInterface, \Stringable
     {
         if (null === $this->option) {
             throw new \BadMethodCallException(
-                'The option have not been created yet so you cannot access proxy methods.'
+                'The option have not been created yet so you cannot access proxy methods.',
             );
         }
 

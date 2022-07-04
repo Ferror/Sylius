@@ -35,7 +35,7 @@ final class CheckoutThankYouContext implements Context
         ThankYouPageInterface $thankYouPage,
         ShowPageInterface $orderShowPage,
         OrderRepositoryInterface $orderRepository,
-        OrderDetailsPage $orderDetails
+        OrderDetailsPage $orderDetails,
     ) {
         $this->thankYouPage = $thankYouPage;
         $this->orderShowPage = $orderShowPage;

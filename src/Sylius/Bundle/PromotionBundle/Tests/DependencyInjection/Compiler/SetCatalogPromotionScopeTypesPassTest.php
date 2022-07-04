@@ -27,21 +27,22 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
             'variant_checker',
             (new Definition())
                 ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'custom'])
-                ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'another_custom'])
+                ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'another_custom']),
         );
         $this->setDefinition(
             'second_variant_checker',
             (new Definition())
-                ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'second_custom'])
+                ->addTag('sylius.catalog_promotion.variant_checker', ['type' => 'second_custom']),
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.catalog_promotion.scopes_types',
-            ['custom', 'another_custom', 'second_custom']
+            ['custom', 'another_custom', 'second_custom'],
         );
     }
+
     /** @test */
     public function it_throws_an_exception_if_there_is_no_type_attribute_defined(): void
     {
@@ -51,7 +52,7 @@ final class SetCatalogPromotionScopeTypesPassTest extends AbstractCompilerPassTe
         $this->setDefinition(
             'variant_checker',
             (new Definition())
-                ->addTag('sylius.catalog_promotion.variant_checker', [])
+                ->addTag('sylius.catalog_promotion.variant_checker', []),
         );
 
         $this->compile();

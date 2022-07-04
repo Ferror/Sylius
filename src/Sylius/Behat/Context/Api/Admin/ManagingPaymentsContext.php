@@ -35,7 +35,7 @@ final class ManagingPaymentsContext implements Context
     public function __construct(
         ApiClientInterface $client,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
     ) {
         $this->client = $client;
         $this->responseChecker = $responseChecker;
@@ -61,7 +61,7 @@ final class ManagingPaymentsContext implements Context
 
         $this->client->applyTransition(
             (string) $payment->getId(),
-            PaymentTransitions::TRANSITION_COMPLETE
+            PaymentTransitions::TRANSITION_COMPLETE,
         );
     }
 
@@ -104,12 +104,12 @@ final class ManagingPaymentsContext implements Context
     public function thePaymentOfTheOrderShouldBeFor(
         string $orderNumber,
         string $paymentState,
-        CustomerInterface $customer
+        CustomerInterface $customer,
     ): void {
         $payments = $this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'state',
-            StringInflector::nameToLowercaseCode($paymentState)
+            StringInflector::nameToLowercaseCode($paymentState),
         );
 
         foreach ($payments as $payment) {
@@ -140,7 +140,7 @@ final class ManagingPaymentsContext implements Context
             $this->client->getLastResponse(),
             $position - 1,
             'order',
-            sprintf('/api/v2/admin/orders/%s', $order->getTokenValue())
+            sprintf('/api/v2/admin/orders/%s', $order->getTokenValue()),
         ));
     }
 
@@ -163,7 +163,7 @@ final class ManagingPaymentsContext implements Context
         Assert::true($this->responseChecker->hasValue(
             $this->client->show((string) $payment->getId()),
             'state',
-            StringInflector::nameToLowercaseCode($paymentState)
+            StringInflector::nameToLowercaseCode($paymentState),
         ));
     }
 
@@ -175,7 +175,7 @@ final class ManagingPaymentsContext implements Context
         Assert::true($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order)
+            $this->iriConverter->getIriFromItem($order),
         ));
     }
 
@@ -187,7 +187,7 @@ final class ManagingPaymentsContext implements Context
         Assert::false($this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order)
+            $this->iriConverter->getIriFromItem($order),
         ));
     }
 }

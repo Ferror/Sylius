@@ -50,7 +50,7 @@ final class CustomerContext implements Context
         ResponseCheckerInterface $responseChecker,
         RegistrationContext $registrationContext,
         LoginContext $loginContext,
-        ShopSecurityContext $shopApiSecurityContext
+        ShopSecurityContext $shopApiSecurityContext,
     ) {
         $this->customerClient = $customerClient;
         $this->orderShopClient = $orderShopClient;
@@ -275,7 +275,7 @@ final class CustomerContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
-            'First name must be at least 2 characters long.'
+            'First name must be at least 2 characters long.',
         ));
     }
 
@@ -286,7 +286,7 @@ final class CustomerContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
-            'Last name must be at least 2 characters long.'
+            'Last name must be at least 2 characters long.',
         ));
     }
 
@@ -297,7 +297,7 @@ final class CustomerContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
-            'Please enter your email.'
+            'Please enter your email.',
         ));
     }
 
@@ -308,7 +308,7 @@ final class CustomerContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
-            'This email is already used.'
+            'This email is already used.',
         ));
     }
 
@@ -319,7 +319,7 @@ final class CustomerContext implements Context
     {
         Assert::true($this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
-            'This email is invalid.'
+            'This email is invalid.',
         ));
     }
 
@@ -330,7 +330,7 @@ final class CustomerContext implements Context
     {
         $this->isViolationWithMessageInResponse(
             $this->customerClient->getLastResponse(),
-            sprintf('There is no shop user with %s email verification token.', $this->verificationToken)
+            sprintf('There is no shop user with %s email verification token.', $this->verificationToken),
         );
     }
 
@@ -372,8 +372,8 @@ final class CustomerContext implements Context
             $this->responseChecker->hasItemWithValue(
                 $this->orderShopClient->getLastResponse(),
                 'number',
-                $orderNumber
-            )
+                $orderNumber,
+            ),
         );
     }
 
@@ -397,7 +397,7 @@ final class CustomerContext implements Context
         Assert::same(
             $response->getStatusCode(),
             204,
-            $response->getContent()
+            $response->getContent(),
         );
     }
 
@@ -410,7 +410,7 @@ final class CustomerContext implements Context
 
         Assert::contains(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),
-            'Provided password is different than the current one.'
+            'Provided password is different than the current one.',
         );
     }
 
@@ -423,7 +423,7 @@ final class CustomerContext implements Context
 
         Assert::contains(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),
-            'newPassword: The entered passwords don\'t match'
+            'newPassword: The entered passwords don\'t match',
         );
     }
 
@@ -434,7 +434,7 @@ final class CustomerContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),
-            sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
+            sprintf('%s must be %s.', ucfirst($elementName), $validationMessage),
         );
     }
 
@@ -471,7 +471,7 @@ final class CustomerContext implements Context
         Assert::same(
             $this->responseChecker->getError($this->customerClient->getLastResponse()),
             \sprintf('Account with email %s is currently verified.', $user->getEmail()),
-            'Validation message is different then expected.'
+            'Validation message is different then expected.',
         );
     }
 

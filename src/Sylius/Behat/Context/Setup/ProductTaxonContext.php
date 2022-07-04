@@ -28,7 +28,7 @@ final class ProductTaxonContext implements Context
 
     public function __construct(
         FactoryInterface $productTaxonFactory,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
     ) {
         $this->productTaxonFactory = $productTaxonFactory;
         $this->objectManager = $objectManager;

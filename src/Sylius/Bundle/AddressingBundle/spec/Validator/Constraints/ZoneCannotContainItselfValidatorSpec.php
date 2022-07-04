@@ -54,7 +54,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_zone_does_not_contain_itself_in_members(
         ExecutionContextInterface $executionContext,
         ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember
+        ZoneMemberInterface $zoneMember,
     ): void {
         $zone->getCode()->willReturn('WORLD');
         $zoneMember->getCode()->willReturn('EU');
@@ -68,7 +68,7 @@ final class ZoneCannotContainItselfValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_zone_contains_itself_in_members(
         ExecutionContextInterface $executionContext,
         ZoneInterface $zone,
-        ZoneMemberInterface $zoneMember
+        ZoneMemberInterface $zoneMember,
     ): void {
         $zone->getCode()->willReturn('EU');
         $zoneMember->getCode()->willReturn('EU');

@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -35,7 +35,7 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
         private FactoryInterface $taxonFactory,
         private TaxonRepositoryInterface $taxonRepository,
         private RepositoryInterface $localeRepository,
-        private TaxonSlugGeneratorInterface $taxonSlugGenerator
+        private TaxonSlugGeneratorInterface $taxonSlugGenerator,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -104,9 +104,9 @@ class TaxonExampleFactory extends AbstractExampleFactory implements ExampleFacto
 
                 return $words;
             })
-            ->setDefault('code', fn(Options $options): string => StringInflector::nameToCode($options['name']))
+            ->setDefault('code', fn (Options $options): string => StringInflector::nameToCode($options['name']))
             ->setDefault('slug', null)
-            ->setDefault('description', fn(Options $options): string => $this->faker->paragraph)
+            ->setDefault('description', fn (Options $options): string => $this->faker->paragraph)
             ->setDefault('translations', [])
             ->setAllowedTypes('translations', ['array'])
             ->setDefault('children', [])

@@ -27,21 +27,22 @@ final class SetCatalogPromotionActionTypesPassTest extends AbstractCompilerPassT
             'price_calculator',
             (new Definition())
                 ->addTag('sylius.catalog_promotion.price_calculator', ['type' => 'custom'])
-                ->addTag('sylius.catalog_promotion.price_calculator', ['type' => 'another_custom'])
+                ->addTag('sylius.catalog_promotion.price_calculator', ['type' => 'another_custom']),
         );
         $this->setDefinition(
             'second_price_calculator',
             (new Definition())
-                ->addTag('sylius.catalog_promotion.price_calculator', ['type' => 'second_custom'])
+                ->addTag('sylius.catalog_promotion.price_calculator', ['type' => 'second_custom']),
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasParameter(
             'sylius.catalog_promotion.actions_types',
-            ['custom', 'another_custom', 'second_custom']
+            ['custom', 'another_custom', 'second_custom'],
         );
     }
+
     /** @test */
     public function it_throws_an_exception_if_there_is_no_type_attribute_defined(): void
     {
@@ -51,7 +52,7 @@ final class SetCatalogPromotionActionTypesPassTest extends AbstractCompilerPassT
         $this->setDefinition(
             'price_calculator',
             (new Definition())
-                ->addTag('sylius.catalog_promotion.price_calculator', [])
+                ->addTag('sylius.catalog_promotion.price_calculator', []),
         );
 
         $this->compile();

@@ -17,7 +17,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Webmozart\Assert\Assert;
 
 final class ManagingProductVariantsPricesContext implements Context
 {
@@ -34,7 +33,7 @@ final class ManagingProductVariantsPricesContext implements Context
     public function iChangeThePriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
         int $price,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['productId' => $variant->getProduct()->getId(), 'id' => $variant->getId()]);
         $this->updatePage->specifyPrice($price, $channel);
@@ -47,7 +46,7 @@ final class ManagingProductVariantsPricesContext implements Context
     public function iChangeTheOriginalPriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
         int $originalPrice,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['productId' => $variant->getProduct()->getId(), 'id' => $variant->getId()]);
         $this->updatePage->specifyOriginalPrice($originalPrice, $channel);
@@ -59,7 +58,7 @@ final class ManagingProductVariantsPricesContext implements Context
      */
     public function iRemoveTheOriginalPriceOfTheProductVariantInChannel(
         ProductVariantInterface $variant,
-        ChannelInterface $channel
+        ChannelInterface $channel,
     ): void {
         $this->updatePage->open(['productId' => $variant->getProduct()->getId(), 'id' => $variant->getId()]);
         $this->updatePage->specifyOriginalPrice(null, $channel);

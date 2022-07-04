@@ -42,7 +42,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -50,9 +50,9 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
             'type' => 'fixed_discount',
             'configuration' => [
                 'WEB_US' => [
-                    'amount' => 20
-                ]
-            ]
+                    'amount' => 20,
+                ],
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -69,15 +69,15 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
         $form->submit([
             'type' => 'percentage_discount',
             'configuration' => [
-                'amount' => 10
-            ]
+                'amount' => 10,
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -94,7 +94,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -102,9 +102,9 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
             'type' => 'fixed_discount',
             'configuration' => [
                 'WEB_US' => [
-                    'amount' => 10
-                ]
-            ]
+                    'amount' => 10,
+                ],
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -121,15 +121,15 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
         $form->submit([
             'type' => 'percentage_discount',
             'configuration' => [
-                'amount' => 10
-            ]
+                'amount' => 10,
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -146,15 +146,15 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
         $form->submit([
             'type' => 'percentage_discount',
             'configuration' => [
-                'amount' => ''
-            ]
+                'amount' => '',
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -171,7 +171,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
@@ -179,9 +179,9 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
             'type' => 'fixed_discount',
             'configuration' => [
                 'WEB_US' => [
-                    'amount' => ''
-                ]
-            ]
+                    'amount' => '',
+                ],
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -198,7 +198,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -206,9 +206,9 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
             'type' => 'fixed_discount',
             'configuration' => [
                 'WEB_US' => [
-                    'amount' => 'Not valid amount'
-                ]
-            ]
+                    'amount' => 'Not valid amount',
+                ],
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -225,7 +225,7 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $fixedDiscount = $this->setupFixedDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $fixedDiscount);
@@ -233,9 +233,9 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
             'type' => 'fixed_discount',
             'configuration' => [
                 'WEB_US' => [
-                    'amount' => 20.54
-                ]
-            ]
+                    'amount' => 20.54,
+                ],
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -252,15 +252,15 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
         $percentageDiscount = $this->setupPercentageDiscount();
 
         $this->channelRepository->findAll(Argument::any())->willReturn(
-            [$this->channel->reveal()]
+            [$this->channel->reveal()],
         );
 
         $form = $this->factory->create(CatalogPromotionActionType::class, $percentageDiscount);
         $form->submit([
             'type' => 'percentage_discount',
             'configuration' => [
-                'amount' => 'Not valid amount'
-            ]
+                'amount' => 'Not valid amount',
+            ],
         ]);
 
         $this->assertTrue($form->isSynchronized());
@@ -294,19 +294,19 @@ final class CatalogPromotionActionTypeTest extends TypeTestCase
             ['sylius'],
             [
                 'percentage_discount' => new PercentageDiscountActionConfigurationType(),
-                'fixed_discount' => new ChannelBasedFixedDiscountActionConfigurationType()
-            ]
+                'fixed_discount' => new ChannelBasedFixedDiscountActionConfigurationType(),
+            ],
         );
 
         $channelCollectionType = new ChannelCollectionType(
-            $this->channelRepository->reveal()
+            $this->channelRepository->reveal(),
         );
 
         $validator = Validation::createValidatorBuilder()->getValidator();
 
         return [
             new PreloadedExtension([$catalogPromotionActionType, $channelCollectionType], []),
-            new ValidatorExtension($validator)
+            new ValidatorExtension($validator),
         ];
     }
 

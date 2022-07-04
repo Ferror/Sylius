@@ -27,7 +27,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        TableAccessorInterface $tableAccessor
+        TableAccessorInterface $tableAccessor,
     ) {
         parent::__construct($session, $minkParameters, $router);
 
@@ -48,7 +48,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $row = $this->tableAccessor->getRowWithFields(
             $this->getElement('customer_orders'),
-            ['number' => $order->getNumber()]
+            ['number' => $order->getNumber()],
         );
 
         $link = $row->find('css', '[data-test-button="sylius.ui.pay"]');
@@ -60,7 +60,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         try {
             $rows = $this->tableAccessor->getRowsWithFields(
                 $this->getElement('customer_orders'),
-                ['number' => $number]
+                ['number' => $number],
             );
 
             return 1 === count($rows);

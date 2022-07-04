@@ -39,18 +39,18 @@ final class CatalogPromotionActionTypeExtension extends AbstractTypeExtension
             ->add('type', ChoiceType::class, [
                 'label' => 'sylius.ui.type',
                 'choices' => $this->actionTypes,
-                'choice_attr' => function(?string $type) use ($builder): array {
+                'choice_attr' => function (?string $type) use ($builder): array {
                     return [
                         'data-configuration' => $this->twig->render(
                             '@SyliusAdmin/CatalogPromotion/_action.html.twig',
                             ['field' => $builder->create(
                                 'configuration',
                                 $this->actionConfigurationTypes[$type],
-                                ['label' => false, 'csrf_protection' => false]
-                            )->getForm()->createView()]
-                        )
+                                ['label' => false, 'csrf_protection' => false],
+                            )->getForm()->createView()],
+                        ),
                     ];
-                }
+                },
             ])
         ;
     }

@@ -197,8 +197,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             sprintf(
                 'Expected a single statistic for channel "%s", but %d were found.',
                 $channelName,
-                $actualStatisticsCount
-            )
+                $actualStatisticsCount,
+            ),
         );
 
         $statisticsContents = $this->getElement('statistics')->findAll('css', '.row');

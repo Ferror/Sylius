@@ -50,7 +50,7 @@ final class ManagingOrdersContext implements Context
         ResponseCheckerInterface $responseChecker,
         IriConverterInterface $iriConverter,
         SecurityServiceInterface $adminSecurityService,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->client = $client;
         $this->shipmentsClient = $shipmentsClient;
@@ -85,7 +85,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->client->applyTransition(
             $this->responseChecker->getValue($this->client->show($order->getTokenValue()), 'tokenValue'),
-            OrderTransitions::TRANSITION_CANCEL
+            OrderTransitions::TRANSITION_CANCEL,
         );
     }
 
@@ -96,7 +96,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->paymentsClient->applyTransition(
             (string) $order->getLastPayment()->getId(),
-            PaymentTransitions::TRANSITION_COMPLETE
+            PaymentTransitions::TRANSITION_COMPLETE,
         );
     }
 
@@ -107,7 +107,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->shipmentsClient->applyTransition(
             (string) $order->getShipments()->first()->getId(),
-            ShipmentTransitions::TRANSITION_SHIP
+            ShipmentTransitions::TRANSITION_SHIP,
         );
     }
 
@@ -127,11 +127,11 @@ final class ManagingOrdersContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasItemWithValue(
-            $this->client->getLastResponse(),
-            'customer',
-            $this->iriConverter->getIriFromItem($customer)
-        ),
-            sprintf('There is no order for customer %s', $customer->getEmail())
+                $this->client->getLastResponse(),
+                'customer',
+                $this->iriConverter->getIriFromItem($customer),
+            ),
+            sprintf('There is no order for customer %s', $customer->getEmail()),
         );
     }
 
@@ -151,7 +151,7 @@ final class ManagingOrdersContext implements Context
         $response = $this->client->getLastResponse();
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($response),
-            'Resource could not be completed. Reason: ' . $response->getContent()
+            'Resource could not be completed. Reason: ' . $response->getContent(),
         );
     }
 
@@ -175,12 +175,12 @@ final class ManagingOrdersContext implements Context
     {
         $shipmentIri = $this->responseChecker->getValue(
             $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
-            'shipments'
+            'shipments',
         )[0];
 
         Assert::true(
             $this->responseChecker->hasValue($this->client->showByIri($shipmentIri['@id']), 'state', strtolower($state)),
-            sprintf('Shipment for this order is not %s', $state)
+            sprintf('Shipment for this order is not %s', $state),
         );
     }
 
@@ -191,12 +191,12 @@ final class ManagingOrdersContext implements Context
     {
         $paymentIri = $this->responseChecker->getValue(
             $this->client->show($this->sharedStorage->get('order')->getTokenValue()),
-            'payments'
+            'payments',
         )[0];
 
         Assert::true(
             $this->responseChecker->hasValue($this->client->showByIri($paymentIri['@id']), 'state', strtolower($state)),
-            sprintf('payment for this order is not %s', $state)
+            sprintf('payment for this order is not %s', $state),
         );
     }
 
@@ -207,7 +207,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::count(
             $this->responseChecker->getValue($this->client->show($this->sharedStorage->get('order')->getTokenValue()), 'payments'),
-            $number
+            $number,
         );
     }
 
@@ -218,7 +218,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show($order->getTokenValue()), 'paymentState', strtolower($paymentState)),
-            sprintf('Order %s does not have %s payment state', $order->getTokenValue(), $paymentState)
+            sprintf('Order %s does not have %s payment state', $order->getTokenValue(), $paymentState),
         );
     }
 
@@ -276,7 +276,7 @@ final class ManagingOrdersContext implements Context
     public function theOrdersPaymentShouldBe(int $paymentAmount): void
     {
         $response = $this->paymentsClient->showByIri(
-            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['@id']
+            $this->responseChecker->getValue($this->client->getLastResponse(), 'payments')[0]['@id'],
         );
 
         Assert::same($this->responseChecker->getValue($response, 'amount'), $paymentAmount);
@@ -290,7 +290,7 @@ final class ManagingOrdersContext implements Context
         $this->iCancelThisOrder($order);
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'Transition "cancel" cannot be applied'
+            'Transition "cancel" cannot be applied',
         );
     }
 
@@ -301,7 +301,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'total'),
-            $total
+            $total,
         );
     }
 
@@ -312,7 +312,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::same(
             $this->responseChecker->getValue($this->client->getLastResponse(), 'orderPromotionTotal'),
-            $promotionTotal
+            $promotionTotal,
         );
     }
 
@@ -322,7 +322,7 @@ final class ManagingOrdersContext implements Context
     public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(
         AdminUserInterface $user,
         OrderInterface $order,
-        string $currency
+        string $currency,
     ): void {
         $this->adminSecurityService->logIn($user);
 

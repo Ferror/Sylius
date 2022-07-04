@@ -344,7 +344,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             function (NodeElement $element) {
                 return $element->getText();
             },
-            $optionElement->findAll('css', 'option')
+            $optionElement->findAll('css', 'option'),
         );
     }
 

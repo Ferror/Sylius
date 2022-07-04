@@ -32,7 +32,7 @@ final class ManagingProductReviewsContext implements Context
     public function __construct(
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
     ) {
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
@@ -190,7 +190,7 @@ final class ManagingProductReviewsContext implements Context
     {
         $this->notificationChecker->checkNotification(
             sprintf('Review has been successfully %s.', $action),
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 

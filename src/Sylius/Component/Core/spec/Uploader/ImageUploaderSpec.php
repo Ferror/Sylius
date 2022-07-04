@@ -26,7 +26,7 @@ final class ImageUploaderSpec extends ObjectBehavior
     function let(
         Filesystem $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
-        ImageInterface $image
+        ImageInterface $image,
     ): void {
         $filesystem->has(Argument::any())->willReturn(false);
 
@@ -43,7 +43,7 @@ final class ImageUploaderSpec extends ObjectBehavior
 
     function it_triggers_a_deprecation_exception_if_not_image_path_generator_is_passed(
         Filesystem $filesystem,
-        ImageInterface $image
+        ImageInterface $image,
     ): void {
         $filesystem->has(Argument::any())->willReturn(false);
 
@@ -59,7 +59,7 @@ final class ImageUploaderSpec extends ObjectBehavior
     function it_uploads_an_image(
         Filesystem $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
-        ImageInterface $image
+        ImageInterface $image,
     ): void {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');
@@ -82,7 +82,7 @@ final class ImageUploaderSpec extends ObjectBehavior
     function it_replaces_an_image(
         Filesystem $filesystem,
         ImagePathGeneratorInterface $imagePathGenerator,
-        ImageInterface $image
+        ImageInterface $image,
     ): void {
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('foo.jpg');

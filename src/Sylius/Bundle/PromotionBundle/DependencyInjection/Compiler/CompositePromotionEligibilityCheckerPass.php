@@ -27,8 +27,8 @@ final class CompositePromotionEligibilityCheckerPass implements CompilerPassInte
 
         $container->getDefinition('sylius.promotion_eligibility_checker')->setArguments([
             array_map(
-                fn($id) => new Reference($id),
-                array_keys($container->findTaggedServiceIds('sylius.promotion_eligibility_checker'))
+                fn ($id) => new Reference($id),
+                array_keys($container->findTaggedServiceIds('sylius.promotion_eligibility_checker')),
             ),
         ]);
     }

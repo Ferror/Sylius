@@ -35,7 +35,7 @@ final class ManagingCustomerGroupsContext implements Context
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         CurrentPageResolverInterface $currentPageResolver,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
@@ -169,7 +169,7 @@ final class ManagingCustomerGroupsContext implements Context
     {
         Assert::same(
             $this->updatePage->getValidationMessage('name'),
-            'Please enter a customer group name.'
+            'Please enter a customer group name.',
         );
     }
 
@@ -219,8 +219,8 @@ final class ManagingCustomerGroupsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]),
             sprintf(
                 'Customer group %s should no longer exist in the registry',
-                $customerGroup->getName()
-            )
+                $customerGroup->getName(),
+            ),
         );
     }
 }

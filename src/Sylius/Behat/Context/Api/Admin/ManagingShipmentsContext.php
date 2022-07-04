@@ -43,7 +43,7 @@ final class ManagingShipmentsContext implements Context
         ApiClientInterface $client,
         ApiIriClientInterface $iriClient,
         ResponseCheckerInterface $responseChecker,
-        IriConverterInterface $iriConverter
+        IriConverterInterface $iriConverter,
     ) {
         $this->client = $client;
         $this->iriClient = $iriClient;
@@ -126,7 +126,7 @@ final class ManagingShipmentsContext implements Context
 
         $this->client->customAction(
             sprintf('/api/v2/admin/shipments/%s/ship', (string) $shipment->getId()),
-            HttpRequest::METHOD_PATCH
+            HttpRequest::METHOD_PATCH,
         );
     }
 
@@ -138,7 +138,7 @@ final class ManagingShipmentsContext implements Context
         $this->client->applyTransition(
             (string) $order->getShipments()->first()->getId(),
             ShipmentTransitions::TRANSITION_SHIP,
-            ['tracking' => $trackingCode]
+            ['tracking' => $trackingCode],
         );
     }
 
@@ -158,7 +158,7 @@ final class ManagingShipmentsContext implements Context
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
             'You cannot ship a shipment that was shipped before.',
-            'Shipment was able to be shipped when should not.'
+            'Shipment was able to be shipped when should not.',
         );
     }
 
@@ -172,7 +172,7 @@ final class ManagingShipmentsContext implements Context
                 'order' => $this->iriConverter->getIriFromItem($order),
                 'state' => strtolower($shippingState),
             ]),
-            sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState)
+            sprintf('Shipment for order %s with state %s does not exist', $order->getNumber(), $shippingState),
         );
     }
 
@@ -186,9 +186,9 @@ final class ManagingShipmentsContext implements Context
                 $this->client->getLastResponse(),
                 --$position,
                 'order',
-                $this->iriConverter->getIriFromItem($order)
+                $this->iriConverter->getIriFromItem($order),
             ),
-            sprintf('On position %s there is no shipment for order %s', $position, $order->getNumber())
+            sprintf('On position %s there is no shipment for order %s', $position, $order->getNumber()),
         );
     }
 
@@ -200,7 +200,7 @@ final class ManagingShipmentsContext implements Context
         Assert::eq(
             new \DateTime($this->responseChecker->getValue($this->client->show((string) $order->getShipments()->first()->getId()), 'shippedAt')),
             new \DateTime($dateTime),
-            'Shipment was shipped in different date'
+            'Shipment was shipped in different date',
         );
     }
 
@@ -212,14 +212,14 @@ final class ManagingShipmentsContext implements Context
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
-        ChannelInterface $channel = null
+        ChannelInterface $channel = null,
     ): void {
         $this->client->index();
 
         foreach ($this->responseChecker->getCollectionItemsWithValue(
             $this->client->getLastResponse(),
             'state',
-            StringInflector::nameToLowercaseCode($shippingState)
+            StringInflector::nameToLowercaseCode($shippingState),
         ) as $shipment) {
             $orderShowResponse = $this->client->showByIri($shipment['order']);
 
@@ -251,7 +251,7 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::true(
             $this->isShipmentForOrder($order),
-            sprintf('There is no shipment for order %s', $order->getNumber())
+            sprintf('There is no shipment for order %s', $order->getNumber()),
         );
     }
 
@@ -262,7 +262,7 @@ final class ManagingShipmentsContext implements Context
     {
         Assert::false(
             $this->isShipmentForOrder($order),
-            sprintf('There is shipment for order %s', $order->getNumber())
+            sprintf('There is shipment for order %s', $order->getNumber()),
         );
     }
 
@@ -277,10 +277,10 @@ final class ManagingShipmentsContext implements Context
         foreach ($shipmentUnitsFromResponse as $shipmentUnitFromResponse) {
             $shipmentUnitResponse = $this->iriClient->showByIri($shipmentUnitFromResponse);
             $productVariantResponse = $this->iriClient->showByIri(
-                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['@id']
+                $this->responseChecker->getValue($shipmentUnitResponse, 'shippable')['@id'],
             );
             $productResponse = $this->iriClient->showByIri(
-                $this->responseChecker->getValue($productVariantResponse, 'product')
+                $this->responseChecker->getValue($productVariantResponse, 'product'),
             );
 
             $productName = $this->responseChecker->getValue($productResponse, 'translations')['en_US']['name'];
@@ -298,7 +298,7 @@ final class ManagingShipmentsContext implements Context
         return $this->responseChecker->hasItemWithValue(
             $this->client->getLastResponse(),
             'order',
-            $this->iriConverter->getIriFromItem($order)
+            $this->iriConverter->getIriFromItem($order),
         );
     }
 }

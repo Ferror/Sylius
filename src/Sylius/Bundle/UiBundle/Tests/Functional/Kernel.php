@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\UiBundle\Tests\Functional;
 
-use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
-use Symfony\Bundle\SecurityBundle\SecurityBundle;
-use Symfony\Bundle\TwigBundle\TwigBundle;
 use Sonata\BlockBundle\SonataBlockBundle;
 use Sylius\Bundle\UiBundle\SyliusUiBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
+use Symfony\Bundle\SecurityBundle\SecurityBundle;
+use Symfony\Bundle\TwigBundle\TwigBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as HttpKernel;
@@ -49,7 +49,7 @@ final class Kernel extends HttpKernel
 
         $containerBuilder->loadFromExtension(
             'sonata_block',
-            ['blocks' => ['sonata.block.service.template' => ['settings' => ['context' => null]]]]
+            ['blocks' => ['sonata.block.service.template' => ['settings' => ['context' => null]]]],
         );
 
         $containerBuilder->loadFromExtension('sylius_ui', ['events' => [

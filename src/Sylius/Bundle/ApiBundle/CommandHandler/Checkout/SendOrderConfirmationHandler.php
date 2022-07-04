@@ -25,7 +25,7 @@ final class SendOrderConfirmationHandler implements MessageHandlerInterface
 {
     public function __construct(
         private SenderInterface $emailSender,
-        private OrderRepositoryInterface $orderRepository
+        private OrderRepositoryInterface $orderRepository,
     ) {
     }
 
@@ -41,7 +41,7 @@ final class SendOrderConfirmationHandler implements MessageHandlerInterface
                 'order' => $order,
                 'channel' => $order->getChannel(),
                 'localeCode' => $order->getLocaleCode(),
-            ]
+            ],
         );
     }
 }

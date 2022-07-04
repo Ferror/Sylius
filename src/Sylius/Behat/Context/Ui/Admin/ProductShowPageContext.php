@@ -68,7 +68,7 @@ final class ProductShowPageContext implements Context
         ShippingElementInterface $shippingElement,
         TaxonomyElementInterface $taxonomyElement,
         OptionsElementInterface $optionsElement,
-        VariantsElementInterface $variantsElement
+        VariantsElementInterface $variantsElement,
     ) {
         $this->indexPage = $indexPage;
         $this->productShowPage = $productShowPage;

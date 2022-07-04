@@ -38,7 +38,7 @@ final class ShippingMethodContext implements Context
         Assert::eq(
             count($shippingMethods),
             1,
-            sprintf('%d shipping methods have been found with name "%s".', count($shippingMethods), $shippingMethodName)
+            sprintf('%d shipping methods have been found with name "%s".', count($shippingMethods), $shippingMethodName),
         );
 
         return $shippingMethods[0];

@@ -125,7 +125,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'code: The shipping category with given code already exists.'
+            'code: The shipping category with given code already exists.',
         );
     }
 
@@ -136,7 +136,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('%s: Please enter shipping category %s.', $element, $element)
+            sprintf('%s: Please enter shipping category %s.', $element, $element),
         );
     }
 
@@ -157,7 +157,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::true(
             $this->isItemOnIndex('name', $shippingCategoryName),
-            sprintf('Shipping category with name %s does not exists', $shippingCategoryName)
+            sprintf('Shipping category with name %s does not exists', $shippingCategoryName),
         );
     }
 
@@ -168,7 +168,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::false(
             $this->isItemOnIndex('name', $name),
-            sprintf('Shipping category with name %s exists', $name)
+            sprintf('Shipping category with name %s exists', $name),
         );
     }
 
@@ -176,12 +176,12 @@ final class ManagingShippingCategoriesContext implements Context
      * @Then /^(this shipping category) should no longer exist in the registry$/
      */
     public function thisShippingCategoryShouldNoLongerExistInTheRegistry(
-        ShippingCategoryInterface $shippingCategory
+        ShippingCategoryInterface $shippingCategory,
     ): void {
         $shippingCategoryName = $shippingCategory->getName();
         Assert::false(
             $this->isItemOnIndex('name', $shippingCategoryName),
-            sprintf('Shipping category with name %s exist', $shippingCategoryName)
+            sprintf('Shipping category with name %s exist', $shippingCategoryName),
         );
     }
 
@@ -194,7 +194,7 @@ final class ManagingShippingCategoriesContext implements Context
 
         Assert::false(
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
-            'The shipping category code should not be changed to "NEW_CODE", but it is'
+            'The shipping category code should not be changed to "NEW_CODE", but it is',
         );
     }
 
@@ -205,7 +205,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::same(
             count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), 'code', $code)),
-            1
+            1,
         );
     }
 
@@ -216,7 +216,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->getLastResponse(), 'name', $name),
-            sprintf('Shipping category with name %s does not exists', $name)
+            sprintf('Shipping category with name %s does not exists', $name),
         );
     }
 
@@ -227,7 +227,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Shipping category could not be created'
+            'Shipping category could not be created',
         );
     }
 
@@ -238,7 +238,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Shipping category could not be edited'
+            'Shipping category could not be edited',
         );
     }
 
@@ -249,7 +249,7 @@ final class ManagingShippingCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Shipping category could not be deleted'
+            'Shipping category could not be deleted',
         );
     }
 

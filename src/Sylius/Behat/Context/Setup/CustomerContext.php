@@ -44,7 +44,7 @@ final class CustomerContext implements Context
         ObjectManager $customerManager,
         FactoryInterface $customerFactory,
         FactoryInterface $userFactory,
-        FactoryInterface $addressFactory
+        FactoryInterface $addressFactory,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerRepository = $customerRepository;
@@ -198,7 +198,7 @@ final class CustomerContext implements Context
         $firstName = null,
         $lastName = null,
         \DateTimeInterface $createdAt = null,
-        $phoneNumber = null
+        $phoneNumber = null,
     ) {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
@@ -232,7 +232,7 @@ final class CustomerContext implements Context
         $enabled = true,
         $firstName = null,
         $lastName = null,
-        $role = null
+        $role = null,
     ) {
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->createNew();

@@ -35,7 +35,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
         private ExtractorInterface $extractor,
         private ResourceMetadataFactoryInterface $decorated,
         private ResourceMetadataPropertyValueResolver $resourceMetadataPropertyValueResolver,
-        array $defaults = []
+        array $defaults = [],
     ) {
         $this->defaults = $defaults + ['attributes' => []];
     }
@@ -46,6 +46,7 @@ final class MergingExtractorResourceMetadataFactory implements ResourceMetadataF
     public function create(string $resourceClass): ResourceMetadata
     {
         $parentResourceMetadata = null;
+
         try {
             $parentResourceMetadata = $this->decorated->create($resourceClass);
         } catch (ResourceClassNotFoundException) {

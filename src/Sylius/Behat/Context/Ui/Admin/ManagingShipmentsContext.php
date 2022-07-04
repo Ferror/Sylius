@@ -38,7 +38,7 @@ final class ManagingShipmentsContext implements Context
         IndexPageInterface $indexPage,
         OrderShowPageInterface $orderShowPage,
         NotificationCheckerInterface $notificationChecker,
-        ShowPageInterface $showPage
+        ShowPageInterface $showPage,
     ) {
         $this->indexPage = $indexPage;
         $this->orderShowPage = $orderShowPage;
@@ -62,7 +62,7 @@ final class ManagingShipmentsContext implements Context
         string $orderNumber,
         string $shippingState,
         CustomerInterface $customer,
-        Channel $channel = null
+        Channel $channel = null,
     ): void {
         $parameters = [
             'number' => $orderNumber,

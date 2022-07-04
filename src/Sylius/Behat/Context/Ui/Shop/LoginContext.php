@@ -14,7 +14,6 @@ declare(strict_types=1);
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use FriendsOfBehat\PageObjectExtension\Page\UnexpectedPageException;
 use Sylius\Behat\Element\Shop\Account\RegisterElementInterface;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
@@ -57,7 +56,7 @@ final class LoginContext implements Context
         WellKnownPasswordChangePageInterface $wellKnownPasswordChangePage,
         RegisterElementInterface $registerElement,
         NotificationCheckerInterface $notificationChecker,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
@@ -242,7 +241,7 @@ final class LoginContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -283,7 +282,7 @@ final class LoginContext implements Context
     {
         Assert::true($this->resetPasswordPage->checkValidationMessageFor(
             'password',
-            'The entered passwords don\'t match'
+            'The entered passwords don\'t match',
         ));
     }
 
@@ -294,7 +293,7 @@ final class LoginContext implements Context
     {
         Assert::true($this->resetPasswordPage->checkValidationMessageFor(
             'password',
-            'Password must be at least 4 characters long.'
+            'Password must be at least 4 characters long.',
         ));
     }
 

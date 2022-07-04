@@ -127,7 +127,7 @@ final class ManagingTaxCategoriesContext implements Context
         $code = $taxCategory->getCode();
         Assert::false(
             $this->isItemOnIndex('code', $code),
-            sprintf('Tax category with code %s exist', $code)
+            sprintf('Tax category with code %s exist', $code),
         );
     }
 
@@ -139,7 +139,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::true(
             $this->isItemOnIndex('name', $taxCategoryName),
-            sprintf('Tax category with name %s does not exist', $taxCategoryName)
+            sprintf('Tax category with name %s does not exist', $taxCategoryName),
         );
     }
 
@@ -152,7 +152,7 @@ final class ManagingTaxCategoriesContext implements Context
 
         Assert::false(
             $this->responseChecker->hasValue($this->client->update(), 'code', 'NEW_CODE'),
-            'The code field with value NEW_CODE exist'
+            'The code field with value NEW_CODE exist',
         );
     }
 
@@ -164,7 +164,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->hasValue($this->client->show($taxCategory->getCode()), 'name', $taxCategoryName),
-            sprintf('Tax category name is not %s', $taxCategoryName)
+            sprintf('Tax category name is not %s', $taxCategoryName),
         );
     }
 
@@ -175,7 +175,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::same(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            'code: The tax category with given code already exists.'
+            'code: The tax category with given code already exists.',
         );
     }
 
@@ -186,7 +186,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::same(
             count($this->responseChecker->getCollectionItemsWithValue($this->client->index(), $element, $value)),
-            1
+            1,
         );
     }
 
@@ -197,7 +197,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::contains(
             $this->responseChecker->getError($this->client->getLastResponse()),
-            sprintf('%s: Please enter tax category %s.', $element, $element)
+            sprintf('%s: Please enter tax category %s.', $element, $element),
         );
     }
 
@@ -224,7 +224,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isCreationSuccessful($this->client->getLastResponse()),
-            'Tax category could not be created'
+            'Tax category could not be created',
         );
     }
 
@@ -235,7 +235,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isUpdateSuccessful($this->client->getLastResponse()),
-            'Tax category could not be edited'
+            'Tax category could not be edited',
         );
     }
 
@@ -246,7 +246,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         Assert::true(
             $this->responseChecker->isDeletionSuccessful($this->client->getLastResponse()),
-            'Tax category could not be deleted'
+            'Tax category could not be deleted',
         );
     }
 

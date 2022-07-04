@@ -27,7 +27,7 @@ final class CustomerContext implements Context
 
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ShowPageInterface $customerShowPage
+        ShowPageInterface $customerShowPage,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerShowPage = $customerShowPage;

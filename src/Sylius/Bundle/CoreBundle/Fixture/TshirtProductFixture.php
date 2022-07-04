@@ -13,8 +13,9 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
+
 @trigger_error('The "TshirtProductFixture" class is deprecated since Sylius 1.5 Use new product fixtures class located at "src/Sylius/Bundle/CoreBundle/Fixture/" instead.', \E_USER_DEPRECATED);
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
@@ -32,7 +33,7 @@ class TshirtProductFixture extends AbstractFixture
         private AbstractResourceFixture $taxonFixture,
         private AbstractResourceFixture $productAttributeFixture,
         private AbstractResourceFixture $productOptionFixture,
-        private AbstractResourceFixture $productFixture
+        private AbstractResourceFixture $productFixture,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver =

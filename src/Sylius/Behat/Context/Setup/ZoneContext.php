@@ -46,7 +46,7 @@ final class ZoneContext implements Context
         RepositoryInterface $zoneRepository,
         ObjectManager $objectManager,
         ZoneFactoryInterface $zoneFactory,
-        FactoryInterface $zoneMemberFactory
+        FactoryInterface $zoneMemberFactory,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->zoneRepository = $zoneRepository;
@@ -129,7 +129,7 @@ final class ZoneContext implements Context
      */
     public function itHasTheCountryMemberAndTheCountryMember(
         ZoneInterface $zone,
-        CountryInterface $country
+        CountryInterface $country,
     ) {
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->addMember($this->createZoneMember($country));
@@ -143,7 +143,7 @@ final class ZoneContext implements Context
      */
     public function itHasTheProvinceMemberAndTheProvinceMember(
         ZoneInterface $zone,
-        ProvinceInterface $province
+        ProvinceInterface $province,
     ) {
         $zone->setType(ZoneInterface::TYPE_PROVINCE);
         $zone->addMember($this->createZoneMember($province));
@@ -157,7 +157,7 @@ final class ZoneContext implements Context
      */
     public function itHasTheZoneMemberAndTheZoneMember(
         ZoneInterface $parentZone,
-        ZoneInterface $childZone
+        ZoneInterface $childZone,
     ) {
         $parentZone->setType(ZoneInterface::TYPE_ZONE);
         $parentZone->addMember($this->createZoneMember($childZone));

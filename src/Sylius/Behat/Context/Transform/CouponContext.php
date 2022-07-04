@@ -22,7 +22,7 @@ final class CouponContext implements Context
     private RepositoryInterface $couponRepository;
 
     public function __construct(
-        RepositoryInterface $couponRepository
+        RepositoryInterface $couponRepository,
     ) {
         $this->couponRepository = $couponRepository;
     }
@@ -38,7 +38,7 @@ final class CouponContext implements Context
 
         Assert::notNull(
             $coupon,
-            sprintf('Coupon with code "%s" does not exist', $couponCode)
+            sprintf('Coupon with code "%s" does not exist', $couponCode),
         );
 
         return $coupon;

@@ -44,7 +44,7 @@ final class SyliusConfigMergeTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             '/api/v2/admin/zones',
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseStatusCodeSame(404);
@@ -105,7 +105,7 @@ final class SyliusConfigMergeTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             '/api/v2/admin/orders',
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseStatusCodeSame(404);
@@ -113,7 +113,7 @@ final class SyliusConfigMergeTest extends ApiTestCase
         static::createClient()->request(
             'GET',
             '/api/v2/admin/orders/get/all',
-            ['auth_bearer' => $this->JWTAdminUserToken]
+            ['auth_bearer' => $this->JWTAdminUserToken],
         );
 
         $this->assertResponseIsSuccessful();
@@ -129,9 +129,9 @@ final class SyliusConfigMergeTest extends ApiTestCase
                 static::createClient()
                     ->request(
                         'PATCH',
-                        '/api/v2/shop/orders/TOKEN/shipments/TEST'
+                        '/api/v2/shop/orders/TOKEN/shipments/TEST',
                     )->getContent(false),
-                true
+                true,
             );
 
         $this->assertResponseStatusCodeSame(404);

@@ -48,7 +48,7 @@ final class CheckoutContext implements Context
         RepositoryInterface $paymentMethodRepository,
         MessageBusInterface $commandBus,
         FactoryInterface $addressFactory,
-        SharedStorageInterface $sharedStorage
+        SharedStorageInterface $sharedStorage,
     ) {
         $this->orderRepository = $orderRepository;
         $this->shippingMethodRepository = $shippingMethodRepository;

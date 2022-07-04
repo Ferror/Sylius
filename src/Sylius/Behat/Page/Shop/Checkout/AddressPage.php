@@ -38,7 +38,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         Session $session,
         $minkParameters,
         RouterInterface $router,
-        AddressFactoryInterface $addressFactory
+        AddressFactoryInterface $addressFactory,
     ) {
         parent::__construct($session, $minkParameters, $router);
 
@@ -62,7 +62,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $billingAddressSwitch = $this->getElement('different_shipping_address');
         Assert::false(
             $billingAddressSwitch->isChecked(),
-            'Previous state of different billing address switch was true expected to be false'
+            'Previous state of different billing address switch was true expected to be false',
         );
 
         $billingAddressSwitch->check();
@@ -326,7 +326,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return array_map(
             /** @return string[] */
             static function (NodeElement $element): string { return $element->getText(); },
-            $element->findAll('css', 'option[value!=""]')
+            $element->findAll('css', 'option[value!=""]'),
         );
     }
 

@@ -38,7 +38,7 @@ final class EmailContext implements Context
     {
         $this->assertEmailContainsMessageTo(
             $this->translator->trans('sylius.email.password_reset.reset_your_password', [], null, $localeCode),
-            $recipient
+            $recipient,
         );
     }
 

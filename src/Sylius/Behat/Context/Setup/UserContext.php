@@ -40,7 +40,7 @@ final class UserContext implements Context
         UserRepositoryInterface $userRepository,
         ExampleFactoryInterface $userFactory,
         ObjectManager $userManager,
-        MessageBusInterface $messageBus
+        MessageBusInterface $messageBus,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;

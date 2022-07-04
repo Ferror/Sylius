@@ -51,7 +51,7 @@ final class ManagingOrdersContext implements Context
         UpdatePageInterface $updatePage,
         HistoryPageInterface $historyPage,
         NotificationCheckerInterface $notificationChecker,
-        SharedSecurityServiceInterface $sharedSecurityService
+        SharedSecurityServiceInterface $sharedSecurityService,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
@@ -241,7 +241,7 @@ final class ManagingOrdersContext implements Context
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ) {
         $this->itShouldBeShippedTo(null, $customerName, $street, $postcode, $city, $countryName);
     }
@@ -255,7 +255,7 @@ final class ManagingOrdersContext implements Context
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ) {
         if (null !== $order) {
             $this->iSeeTheOrder($order);
@@ -269,11 +269,11 @@ final class ManagingOrdersContext implements Context
      * @Then the order should be billed to :customerName, :street, :postcode, :city, :countryName
      */
     public function itShouldBeBilledToCustomerAtAddress(
-           string $customerName,
-           string $street,
-           string $postcode,
-           string $city,
-           string $countryName
+        string $customerName,
+        string $street,
+        string $postcode,
+        string $city,
+        string $countryName,
     ) {
         $this->itShouldBeBilledTo(null, $customerName, $street, $postcode, $city, $countryName);
     }
@@ -287,7 +287,7 @@ final class ManagingOrdersContext implements Context
         string $street,
         string $postcode,
         string $city,
-        string $countryName
+        string $countryName,
     ) {
         if (null !== $order) {
             $this->iSeeTheOrder($order);
@@ -512,7 +512,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Payment has been successfully updated.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -523,7 +523,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Payment has been successfully refunded.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -575,7 +575,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Shipment has been successfully updated.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -602,7 +602,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->notificationChecker->checkNotification(
             'Order has been successfully updated.',
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 
@@ -637,7 +637,7 @@ final class ManagingOrdersContext implements Context
     public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
         AdminUserInterface $user,
         $note,
-        OrderInterface $order
+        OrderInterface $order,
     ) {
         $this->sharedSecurityService->performActionAsAdminUser(
             $user,
@@ -645,7 +645,7 @@ final class ManagingOrdersContext implements Context
                 $this->showPage->open(['id' => $order->getId()]);
 
                 Assert::true($this->showPage->hasNote($note));
-            }
+            },
         );
     }
 
@@ -796,7 +796,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theAdministratorShouldKnowAboutIPAddressOfThisOrderMadeBy(
         AdminUserInterface $user,
-        OrderInterface $order
+        OrderInterface $order,
     ) {
         $this->sharedSecurityService->performActionAsAdminUser(
             $user,
@@ -804,7 +804,7 @@ final class ManagingOrdersContext implements Context
                 $this->showPage->open(['id' => $order->getId()]);
 
                 Assert::notSame($this->showPage->getIpAddressAssigned(), '');
-            }
+            },
         );
     }
 
@@ -944,7 +944,7 @@ final class ManagingOrdersContext implements Context
     {
         $this->notificationChecker->checkNotification(
             sprintf('%s confirmation has been successfully resent to the customer.', ucfirst($type)),
-            NotificationType::success()
+            NotificationType::success(),
         );
     }
 

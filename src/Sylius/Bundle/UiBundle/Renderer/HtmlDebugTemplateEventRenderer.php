@@ -23,7 +23,7 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
 {
     public function __construct(
         private TemplateEventRendererInterface $templateEventRenderer,
-        private TemplateBlockRegistryInterface $templateBlockRegistry
+        private TemplateBlockRegistryInterface $templateBlockRegistry,
     ) {
     }
 
@@ -36,7 +36,7 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
         if ($shouldRenderHtmlDebug) {
             $renderedParts[] = sprintf(
                 '<!-- BEGIN EVENT | event name: "%s" -->',
-                implode(', ', $eventNames)
+                implode(', ', $eventNames),
             );
         }
 
@@ -45,7 +45,7 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
         if ($shouldRenderHtmlDebug) {
             $renderedParts[] = sprintf(
                 '<!-- END EVENT | event name: "%s" -->',
-                implode(', ', $eventNames)
+                implode(', ', $eventNames),
             );
         }
 
@@ -57,6 +57,6 @@ final class HtmlDebugTemplateEventRenderer implements TemplateEventRendererInter
      */
     private function shouldRenderHtmlDebug(array $templateBlocks): bool
     {
-        return count($templateBlocks) === 0 || count(array_filter($templateBlocks, static fn(TemplateBlock $templateBlock): bool => strrpos($templateBlock->getTemplate(), '.html.twig') !== false)) >= 1;
+        return count($templateBlocks) === 0 || count(array_filter($templateBlocks, static fn (TemplateBlock $templateBlock): bool => strrpos($templateBlock->getTemplate(), '.html.twig') !== false)) >= 1;
     }
 }

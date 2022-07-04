@@ -45,7 +45,7 @@ final class TaxationContext implements Context
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
         TaxCategoryRepositoryInterface $taxCategoryRepository,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->taxRateFactory = $taxRateFactory;
@@ -66,7 +66,7 @@ final class TaxationContext implements Context
         $taxCategoryName,
         ZoneInterface $zone,
         $taxRateCode = null,
-        $includedInPrice = false
+        $includedInPrice = false,
     ) {
         $taxCategory = $this->getOrCreateTaxCategory($taxCategoryName);
 
@@ -156,7 +156,7 @@ final class TaxationContext implements Context
         Assert::eq(
             count($taxCategories),
             1,
-            sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName)
+            sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName),
         );
 
         return $taxCategories[0];

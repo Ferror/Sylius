@@ -30,7 +30,7 @@ final class CurrencySwitchController
         private EngineInterface|Environment $templatingEngine,
         private CurrencyContextInterface $currencyContext,
         private CurrencyStorageInterface $currencyStorage,
-        private ChannelContextInterface $channelContext
+        private ChannelContextInterface $channelContext,
     ) {
     }
 
@@ -40,8 +40,8 @@ final class CurrencySwitchController
         $channel = $this->channelContext->getChannel();
 
         $availableCurrencies = array_map(
-            fn(CurrencyInterface $currency) => $currency->getCode(),
-            $channel->getCurrencies()->toArray()
+            fn (CurrencyInterface $currency) => $currency->getCode(),
+            $channel->getCurrencies()->toArray(),
         );
 
         return new Response($this->templatingEngine->render('@SyliusShop/Menu/_currencySwitch.html.twig', [

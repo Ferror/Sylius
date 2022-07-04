@@ -13,8 +13,8 @@ declare(strict_types=1);
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Faker\Generator;
 use Faker\Factory;
+use Faker\Generator;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
@@ -35,7 +35,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         private ReviewFactoryInterface $productReviewFactory,
         private ProductRepositoryInterface $productRepository,
         private CustomerRepositoryInterface $customerRepository,
-        private FactoryInterface $stateMachineFactory
+        private FactoryInterface $stateMachineFactory,
     ) {
         $this->faker = Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -50,7 +50,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
         /** @var ReviewInterface $productReview */
         $productReview = $this->productReviewFactory->createForSubjectWithReviewer(
             $options['product'],
-            $options['author']
+            $options['author'],
         );
         $productReview->setTitle($options['title']);
         $productReview->setComment($options['comment']);
@@ -71,7 +71,7 @@ class ProductReviewExampleFactory extends AbstractExampleFactory implements Exam
 
                 return $words;
             })
-            ->setDefault('rating', fn(Options $options): int => $this->faker->numberBetween(1, 5))
+            ->setDefault('rating', fn (Options $options): int => $this->faker->numberBetween(1, 5))
             ->setDefault('comment', function (Options $options): string {
                 /** @var string $sentences */
                 $sentences = $this->faker->sentences(3, true);
